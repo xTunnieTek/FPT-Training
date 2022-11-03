@@ -28,9 +28,10 @@ class LoginController extends Controller
 
     public function callbackFromGoogle()
     {
+
+
         try {
             $user = Socialite::driver('google')->user();
-
             // Check Users Email If Already There
             $is_user = User::where('email', $user->getEmail())->first();
             if(!$is_user){
@@ -42,13 +43,19 @@ class LoginController extends Controller
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
                     'avatar_original' => $user->getAvatar(),
+                    'ip' => $ip,
                     'password' => Hash::make($user->getName().'@'.$user->getId()),
                     'email_verified_at' => now(),
+                    // Lấy vị trí hiện tại
+                    'address' => $location,
+                    //'address'=> $user->user->getAddress() ?? '',
+                    'role'=> '2',
                 ]);
             }else{
                 $saveUser = User::where('email',  $user->getEmail())->update([
                     'google_id' => $user->getId(),
                     'avatar_original' => $user->getAvatar(),
+                    'address'=> Location::get($user->token),
                 ]);
                 $saveUser = User::where('email', $user->getEmail())->first();
             }
