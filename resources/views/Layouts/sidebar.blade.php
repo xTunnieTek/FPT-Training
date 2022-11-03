@@ -51,6 +51,22 @@
             <span class="nav-link-text ms-1">Course</span>
           </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link " href="./pages/sign-up.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Document</span>
+            </a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link " href="./pages/sign-in.html">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-copy-04 text-white text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Class</span>
+            </a>
+          </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage Account</h6>
         </li>
@@ -65,20 +81,28 @@
         <li class="nav-item">
           <a class="nav-link " href="./pages/sign-in.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+              <i class="ni ni-badge text-primary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Sign In</span>
+            <span class="nav-link-text ms-1">Manage Staff</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="./pages/sign-up.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
+              <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
+            <span class="nav-link-text ms-1">Manage Trainer</span>
           </a>
         </li>
+
       </ul>
+    </div>
+    <div class="sidenav-footer mx-3 ">
+        <div class="card card-plain shadow-none" id="sidenavCard">
+          <div class="card-body text-center p-3 w-100 pt-0">
+              <a class="btn btn-primary btn-sm mb-0 w-100" href="#" type="button">Logout</a>
+          </div>
+        </div>
     </div>
   </aside>
 
