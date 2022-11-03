@@ -23,7 +23,6 @@
                     <input type="text" class="form-control" placeholder="Type here...">
                 </div>
             </div>
-<<<<<<< Updated upstream
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
