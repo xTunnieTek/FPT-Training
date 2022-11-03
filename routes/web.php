@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SignupController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +20,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [LoginController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [LoginController::class, 'callbackFromGoogle'])->name('callback');
 });
 
-Route::get('/login', function()
-{
-    return view('login');
+
+// Route::post('/login', 'SignupController@postSignup') ->name('signup');
+// Route::get('/dashboard', 'DashboardController@getDashboard') ->name('dashboard');
+
+Route::get('/login', [LoginController::class, 'getLogin'])->name('login');
+
+Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
+Route::post('/login', [SignupController::class, 'postSignup'])->name('signup');
+
+
+// Logout
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// Middeleware
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
 });
