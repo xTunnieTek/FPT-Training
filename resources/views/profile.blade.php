@@ -3,7 +3,7 @@
 @include('Layouts.navbar')
 
 
-<div class="card shadow-lg mx-4 card-profile-bottom">
+<div class="card shadow-lg mx-4 card-profile-top">
     <div class="card-body p-3">
       <div class="row gx-4">
         <div class="col-auto">
@@ -27,73 +27,104 @@
   </div>
   <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header pb-0">
-            <div class="d-flex align-items-center">
-              <p class="mb-0">Edit Profile</p>
-              <button class="btn btn-primary btn-sm ms-auto">Settings</button>
-            </div>
-          </div>
-          <div class="card-body">
-            <p class="text-uppercase text-sm">User Information</p>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label" >Username</label>
-                  <input class="form-control" type="password" value="*****{{ Auth::user()->google_id }}*****" disabled>
+        <div class="col-md-8">
+            <form method="POST">
+                @csrf
+            <div class="card">
+              <div class="card-header pb-0">
+                <div class="d-flex align-items-center">
+                  <p class="mb-0">Edit Profile</p>
+                  <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Update</a>
+                  {{-- <button class="btn btn-primary btn-sm ms-auto">Update</button> --}}
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Email address</label>
-                  {{-- In 50% email cuối ra --}}
-                  <input class="form-control" type="email" value="{{ Auth::user()->email}}" disabled>
+              <div class="card-body">
+                <p class="text-uppercase text-sm">User Information</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label" >Username</label>
+                      <input class="form-control" type="password" value="{{ Auth::user()->id }}@2001{{ Auth::user()->google_id }}@2001{{ Auth::user()->id }}"  >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Email address</label>
+                      <input class="form-control" type="email" value="{{ Auth::user()->email}}" disabled id="email" name="email">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Full name</label>
+                      <input class="form-control" type="text" value="{{ Auth::user()->name }}" name="name" id="name" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Birthday</label>
+                      <input class="form-control" type="date" name="birthday" id="birthday">
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Full name</label>
-                  <input class="form-control" type="text" value="{{ Auth::user()->name }}">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Birthday</label>
-                  <input class="form-control" type="text" value="{{ Auth::user()->birthday }}">
-                </div>
-              </div>
-            </div>
-            <hr class="horizontal dark">
-            <p class="text-uppercase text-sm">Contact Information</p>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Address</label>
-                  <input class="form-control" type="text" value="{{ Auth::user()->address }}">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">Country</label>
-                  <input class="form-control" type="text" value="Vietnam">
-                </div>
-              </div>
+                <hr class="horizontal dark">
+                <p class="text-uppercase text-sm">Contact Information</p>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Address</label>
+                      <input class="form-control" type="text" value="{{ Auth::user()->address }}" id="address" name="address">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Phone Number</label>
+                        <input class="form-control" type="text" value="{{ Auth::user()->phone }}" id="phone" name="phone">
+                    </div>
+                    </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">City/Campus</label>
+                      <select name="city" id="city" class="form-control" placeholder="Please choose campus">
+                        <option value="{{ Auth::user()->city }}" selected>{{ Auth::user()->city }}</option>
+                        <option value="FPT Hanoi">FPT Hanoi</option>
+                        <option value="FPT Danang">FPT Danang</option>
+                        <option value="FPT Quynhon">FPT Quynhon</option>
+                        <option value="FPT Hochiminh">FPT Hochiminh</option>
+                        <option value="FPT Cantho">FPT Cantho</option>
+                        <option value="FPT Ville">FPT Ville</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Department/Specialized</label>
+                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}">
+                            {{-- Đã chọn --}}
+                            <option value="{{ Auth::user()->specialized}}" selected>{{ Auth::user()->specialized}}</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="Business">Business</option>
+                            <option value="Design">Design Graphics</option>
+                            <option value="Training">Training Department</option>
+                            <option value="Admin">Administrators</option>
+                          </select>
+                    </div>
+                    </div>
 
-            </div>
-            <hr class="horizontal dark">
-            <p class="text-uppercase text-sm">About me</p>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="example-text-input" class="form-control-label">About me</label>
-                  <input class="form-control" type="text" value="">
+                </div>
+                <hr class="horizontal dark">
+                <p class="text-uppercase text-sm">About me</p>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">About me</label>
+                      <input class="form-control" type="text" value="" id="about" name="about">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      </form>
       <div class="col-md-4">
         <div class="card card-profile">
           <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top">

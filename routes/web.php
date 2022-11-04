@@ -26,17 +26,11 @@ Route::prefix('google')->name('google.')->group( function(){
 });
 
 
-// Route::post('/login', 'SignupController@postSignup') ->name('signup');
-// Route::get('/dashboard', 'DashboardController@getDashboard') ->name('dashboard');
+
 
 Route::get('/login', [LoginController::class, 'getLogin'])->name('login');
-
 Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
 Route::post('/login', [SignupController::class, 'postSignup'])->name('signup');
-
-
-// Logout
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // Middeleware
@@ -44,4 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
+    // Route::get('/delete/{id}', [ProfileController::class, 'delete'])->name('delete');
 });

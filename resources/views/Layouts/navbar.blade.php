@@ -1,3 +1,8 @@
+{{-- @if(session('success'))
+<div class="alert alert-success" role="alert">
+    <strong>{{ session('success') }}</strong>
+</div>
+@endif --}}
 <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
@@ -8,7 +13,6 @@
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">
-            {{-- Print name user session --}}
             Welcome {{ Auth::user()->name }}!
           </h6>
         </nav>
