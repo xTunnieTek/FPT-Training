@@ -7,7 +7,7 @@
               document.write(new Date().getFullYear())
             </script>,
             Developed by
-            <a href="https/facebook.com/FSTunnie" class="font-weight-bold" target="_blank">TunnieTek</a>
+            <a href="https/facebook.com/FSTunnie" class="font-weight-bold">TunnieTek</a>
           </div>
         </div>
         <div class="col-lg-6">

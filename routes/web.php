@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\StaffController;
 
 
 
@@ -35,9 +37,24 @@ Route::post('/login', [SignupController::class, 'postSignup'])->name('signup');
 
 // Middeleware
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
-    Route::post('/profile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
-    // Route::get('/delete/{id}', [ProfileController::class, 'delete'])->name('delete');
+        Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
+        Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+        Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
+        Route::post('/profile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
+
+        Route::get('/manage-trainer', [TrainerController::class, 'getTrainer'])->name('manageTrainer');
+        Route::get('/all-trainer', [TrainerController::class, 'getAllTrainer'])->name('allTrainer');
+        Route::get('/edit-trainer/{id}', [TrainerController::class, 'edit'])->name('editTrainer');
+        Route::post('/edit-trainer/{id}', [TrainerController::class, 'update'])->name('updateTrainer');
+        Route::get('/delete-trainer/{id}', [TrainerController::class, 'delete'])->name('deleteTrainer');
+
+        // Staff
+        Route::get('/manage-staff', [StaffController::class, 'getStaff'])->name('manageStaff');
+        Route::get('/all-staff', [StaffController::class, 'getAllStaff'])->name('allStaff');
+        Route::get('/edit-staff/{id}', [StaffController::class, 'edit'])->name('editStaff');
+        Route::post('/edit-staff/{id}', [StaffController::class, 'update'])->name('updateStaff');
+        Route::get('/delete-staff/{id}', [StaffController::class, 'delete'])->name('deleteStaff');
+
 });
+
+

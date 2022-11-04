@@ -81,7 +81,7 @@
           {{-- Check role nếu bằng 1 thì show không thì hidden --}}
             @if (Auth::user()->role == 'admin')
             <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-in.html">
+                <a class="nav-link " href="{{ route('manageStaff')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-badge text-primary text-sm opacity-10"></i>
                   </div>
@@ -89,7 +89,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-up.html">
+                <a class="nav-link " href="{{ route('manageTrainer')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                   </div>
@@ -98,7 +98,7 @@
               </li>
             @elseif (Auth::user()->role == 'staff')
               <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-up.html">
+                <a class="nav-link " href="{{ route('manageTrainer')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                   </div>
