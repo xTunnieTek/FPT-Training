@@ -1,3 +1,8 @@
+{{-- @if(session('success'))
+<div class="alert alert-success" role="alert">
+    <strong>{{ session('success') }}</strong>
+</div>
+@endif --}}
 <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
@@ -7,15 +12,27 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
           </ol>
+<<<<<<< HEAD
           <h6 class="font-weight-bolder text-white mb-0">Welcome Cong Tuan</h6>
+=======
+          <h6 class="font-weight-bolder text-white mb-0">
+            Welcome {{ Auth::user()->name }}!
+          </h6>
+>>>>>>> tuanqc
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group">
+                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" placeholder="Type here...">
+                </div>
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         </div>
+=======
+        <img src="{{Auth::user()->avatar_original }}" class="img-avatar">
+      </div>
+>>>>>>> tuanqc
     </nav>

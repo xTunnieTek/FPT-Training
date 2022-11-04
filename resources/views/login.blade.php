@@ -15,7 +15,7 @@
           @csrf
           <h1>Create Account</h1>
           <div class="social-container">
-            <a href="{{ url('auth/google') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="{{ route('google.login') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
           </div>
           <span>or use your email for registration</span>
           <input type="text" placeholder="Name" id="name" name="name"/>
@@ -29,7 +29,7 @@
           @csrf
           <h1>Sign in</h1>
           <div class="social-container">
-            <a href="{{ url('auth/google') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="{{ route('google.login') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
           </div>
           <span>or use your account</span>
           <input type="email" placeholder="Email" id="email" name="email"/>
