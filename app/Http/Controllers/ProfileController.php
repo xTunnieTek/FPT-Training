@@ -22,7 +22,6 @@ class ProfileController extends Controller
             'name' => 'required',
             'email' => 'required|email',
         ]);
-
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -33,8 +32,7 @@ class ProfileController extends Controller
         $user->specialized = $request->specialized;
         $user->about = $request->about;
         $user->save();
-
-        return redirect()->route('updateProfile')->with('success', 'Profile updated successfully');
+        return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
 
 //   Delete
@@ -44,6 +42,7 @@ class ProfileController extends Controller
         $user->delete();
         return redirect()->route('dashboard')->with('success', 'User deleted successfully');
     }
+
 
 }
 

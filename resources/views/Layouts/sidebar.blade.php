@@ -28,15 +28,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./pages/billing.html">
+            <a class="nav-link " href="{{ route('manageCategory')}}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Billing</span>
+              <span class="nav-link-text ms-1">Category</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./pages/sign-in.html">
+          {{-- <li class="nav-item">
+            <a class="nav-link " href="">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
               </div>
@@ -44,15 +44,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./pages/sign-up.html">
+            <a class="nav-link " href="{{ route('manageCourse')}}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-collection text-info text-sm opacity-10"></i>
               </div>
               <span class="nav-link-text ms-1">Course</span>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-              <a class="nav-link " href="./pages/sign-up.html">
+              <a class="nav-link " href="">
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
                 </div>
@@ -60,7 +60,7 @@
               </a>
             </li>
           <li class="nav-item">
-              <a class="nav-link " href="./pages/sign-in.html">
+              <a class="nav-link " href="">
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-single-copy-04 text-white text-sm opacity-10"></i>
                 </div>

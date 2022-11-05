@@ -2,12 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DB;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TopicController;
 
+Route::get('/', function () {
+    return view('login');
+});
 
 
 
@@ -27,6 +34,10 @@ Route::prefix('google')->name('google.')->group( function(){
     Route::any('callback', [LoginController::class, 'callbackFromGoogle'])->name('callback');
 });
 
+
+// Route::get('/topic', function () {
+//     return view('topic');
+// });
 
 
 
@@ -54,6 +65,30 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit-staff/{id}', [StaffController::class, 'edit'])->name('editStaff');
         Route::post('/edit-staff/{id}', [StaffController::class, 'update'])->name('updateStaff');
         Route::get('/delete-staff/{id}', [StaffController::class, 'delete'])->name('deleteStaff');
+
+        // Category
+        Route::get('/manage-category', [CategoryController::class, 'getCategory'])->name('manageCategory');
+
+        // Course
+        Route::get('/manage-course', [CourseController::class, 'getCourse'])->name('manageCourse');
+        Route::get('/all-course', [CourseController::class, 'getAllCourse'])->name('allCourse');
+        Route::get('/edit-course/{id}', [CourseController::class, 'edit'])->name('editCourse');
+        Route::post('/edit-course/{id}', [CourseController::class, 'update'])->name('updateCourse');
+        Route::get('/delete-course/{id}', [CourseController::class, 'delete'])->name('deleteCourse');
+        Route::post('/add-course', [CourseController::class, 'addCourse'])->name('addCourse');
+
+
+        // Profile
+        Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
+        Route::post('updateProfile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
+
+        //Topic
+        Route::get('/manage-topic/{id}', [TopicController::class, 'getTopic'])->name('manageTopic');
+        Route::get('/all-topic', [TopicController::class, 'getAllTopic'])->name('allTopic');
+        Route::get('/edit-topic/{id}', [TopicController::class, 'edit'])->name('editTopic');
+        Route::post('/edit-topic/{id}', [TopicController::class, 'update'])->name('updateTopic');
+        Route::get('/delete-topic/{id}', [TopicController::class, 'delete'])->name('deleteTopic');
+        Route::post('/add-topic', [TopicController::class, 'addTopic'])->name('addTopic');
 
 });
 

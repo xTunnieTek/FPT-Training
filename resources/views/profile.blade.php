@@ -15,7 +15,7 @@
           <div class="h-100">
             <h5 class="mb-1">
                 {{ Auth::user()->name }}
-                <p style="text-transform	:uppercase ">{{ Auth::user()->role}}</p>
+                <p style="text-transform:uppercase ">{{ Auth::user()->role}}</p>
             </h5>
             <p class="mb-0 font-weight-bold text-sm">
                 {{ Auth::user()->email }}
@@ -28,14 +28,14 @@
   <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-8">
-            <form method="POST">
+            <form method="post" action="{{ route('updateProfile')}}" enctype="multipart/form-data" >
                 @csrf
             <div class="card">
               <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                   <p class="mb-0">Edit Profile</p>
-                  <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Update</a>
-                  {{-- <button class="btn btn-primary btn-sm ms-auto">Update</button> --}}
+                  {{-- <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Update</a> --}}
+                  <button class="btn btn-primary btn-sm ms-auto">Update</button>
                 </div>
               </div>
               <div class="card-body">
@@ -109,7 +109,6 @@
                           </select>
                     </div>
                     </div>
-
                 </div>
                 <hr class="horizontal dark">
                 <p class="text-uppercase text-sm">About me</p>
