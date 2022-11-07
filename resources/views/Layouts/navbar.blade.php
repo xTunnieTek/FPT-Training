@@ -36,7 +36,9 @@
             </div>
           </div>
         </div>
-        <img src="{{Auth::user()->avatar_original }}" class="img-avatar">
+        <a class="nav-link " href="{{ route('profile') }}">
+            <img src="{{Auth::user()->avatar_original }}" class="img-avatar">
+        </a>
       </div>
     </nav>
 

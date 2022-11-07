@@ -14,9 +14,13 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$category->categoryname}}</h5>
                   <p class="card-text">{{$category->description}}</p>
-                  @if (Auth::user()->specialized == $category->categoryname)
-                    <a href="{{ route('manageCourse')}}" class="btn btn-primary">Go {{$category->categoryname}} Course</a>
-                  @endif
+                    @if (Auth::user()->role == 'admin')
+                        <a href="{{"/manage-course/Category=".$category['categoryid']}}" class="btn btn-primary">Go {{$category->categoryname}} Course</a>
+                    @else
+                        @if (Auth::user()->specialized == $category->categoryname)
+                        <a href="{{ "/manage-course/Category=".$category['categoryid']}}" class="btn btn-primary">Go {{$category->categoryname}} Course</a>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>

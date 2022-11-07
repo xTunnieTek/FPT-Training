@@ -7,7 +7,8 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6>Courses | <a class="btn btn-outline-primary btn-sm mb-0" href="{{ route('manageCourse')}}">Back</a></h6>
+            {{-- tạo button back trang trước --}}
+            <h6>Courses | <a href="{{ url()->previous() }}" class="btn btn-primary btn-sm ms-auto ">Back</a> </h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -23,12 +24,15 @@
                 </thead>
                 <tbody>
                     @foreach ($course as $course)
-                    @if ($course->categoryname == Auth::user()->specialized)
                     <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
-                                <img src="{{ $course->images }}" class="avatar avatar-sm me-3" alt="courses">
+                                @if ($course->courseimage == null)
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOmlrM_TVR1HT9NLCnu9wGDk5dbK-RTXpyWw&usqp=CAU" class="avatar avatar-sm me-3">
+                                @else
+                                    <img src="{{ $course->images }}" class="avatar avatar-sm me-3" >
+                                @endif
                             </div>
                             <div class="d-flex flex-column justify-content-center">
                               <h6 class="mb-0 text-sm">{{ $course->coursename }}</h6>
@@ -54,12 +58,12 @@
                           </a>
                         </td>
                         <td class="align-middle">
-                            <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="{{"/delete-course/".$course['courseid']}}" class="text-secondary font-weight-bold text-xs">
                               Delete
                             </a>
+                          </td>
                         </td>
                       </tr>
-                    @endif
                     @endforeach
                 </tbody>
               </table>

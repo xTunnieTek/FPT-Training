@@ -11,6 +11,8 @@ class Topic extends Model
     protected $table = 'topics';
     public $timestamps = false;
 
+    protected $primaryKey = 'topicid';
+
     protected $fillable = [
         'courseid',
         'topicid',

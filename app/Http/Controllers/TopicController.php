@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Course;
@@ -13,8 +14,10 @@ use App\Models\Topic;
 class TopicController extends Controller
 {
     public function getTopic($courseid){
-        $topic = topic::join('courses', 'topics.courseid', '=', 'courses.courseid')->select('topics.*', 'coursename as coursename')->where('topics.courseid', $courseid)->get();
-        return view('topic', ['topic' => $topic]);
+        $course = course::join('category', 'courses.categoryid', '=', 'category.categoryid')->select('courses.*', 'categoryname as categoryname')->where('courses.courseid', $courseid)->get();
+        $topic = topic::join('courses', 'topics.courseid', '=', 'courses.courseid')->select('topics.*', 'courses.*')->where('topics.courseid', $courseid)->get();
+        // return view('topic', ['topic' => $topic]);
+        return view('topic', ['topic' => $topic, 'course' => $course]);
     }
 
     public function getAllTopic(){
@@ -29,7 +32,8 @@ class TopicController extends Controller
         $topic->about = $request->about;
         $topic->link = $request->link;
         $topic->save();
-        return redirect()->route('manageTopic')->with('success', 'Topic Added Successfully!');
+        // return back
+        return redirect()->back();
     }
 
     public function editTopic($topicid){

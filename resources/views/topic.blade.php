@@ -49,9 +49,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label" >Courses</label>
+                      {{-- <input type="text" class="form-control" name="courseid" value="a" d> --}}
                         <select class="form-control" name="courseid">
-                            @foreach($topic as $item)
-                                <option value="{{ $item->courseid }}" selected>{{ $item->coursename }}</option>
+                            @foreach ($course as $item )
+                                <option value="{{ $item->courseid }}">{{ $item->coursename }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -69,8 +70,8 @@
                   <div class="col-md-12">
                     <div class="form-group">
                         <iframe width="100%" height="315" id="myFrame" title="YouTube video player" frameborder="0"></iframe>
+                        <a class="btn btn-primary btn-sm ms-auto" onclick="showVideo()">Preview</a>
                     </div>
-
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
@@ -91,30 +92,26 @@
                       <h6 class="mb-0">Topics</h6>
                     </div>
                     <div class="col-6 text-end">
-                    <button class="btn btn-outline-primary btn-sm mb-0" onclick="showVideo()">Preview</button>
-                      <a class="btn btn-outline-success btn-sm mb-0" href="{{ route('allCourse')}}">View All</a>
+                    {{-- <button class="btn btn-outline-primary btn-sm mb-0" onclick="showVideo()">Preview</button> --}}
+                      {{-- <a class="btn btn-outline-success btn-sm mb-0" href="{{ route('allCourse')}}">View All</a> --}}
                     </div>
                   </div>
                 </div>
                 <div class="card-body p-3">
-                    {{-- @foreach ( $topic as $topic )
-                    <div class="d-flex px-2">
-                        <div>
-                          <img src="" class="avatar avatar-sm me-3" alt="spotify">
-                        </div>
-                        <div class="my-auto">
-                          <h6 class="mb-0 text-sm">{{ $topic->title }}</h6>
-                        </div>
-                        <div class="ms-auto text-end">
-                          <a href="" class="btn btn-link text-dark btn-icon-only btn-sm">
-                            <i class="fas fa-edit"></i>
-                          </a>
-                          <a href="" class="btn btn-link text-danger btn-icon-only btn-sm">
-                            <i class="fas fa-trash"></i>
-                          </a>
-                        </div>
-                      </div>
-                    @endforeach --}}
+                    <ul class="list-group list-group-flush">
+                        @foreach($topic as $item)
+                        <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark font-weight-bold text-sm">{{$item->title}}</h6>
+                                <span class="text-xs">{{$item->coursename}}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-sm">
+                                <span class="me-2 text-success font-weight-bold">Active</span>
+                                <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" href=""><i class="fas fa-file-pdf text-lg me-1"></i>View Topic</a>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
               </div>
             </div>

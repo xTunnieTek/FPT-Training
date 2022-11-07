@@ -11,6 +11,8 @@ class Course extends Model
     protected $table = 'courses';
         public $timestamps = false;
 
+    protected $primaryKey = 'courseid';
+
     protected $fillable = [
         'courseid',
         'coursename',

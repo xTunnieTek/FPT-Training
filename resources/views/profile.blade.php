@@ -61,8 +61,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Birthday</label>
-                      <input class="form-control" type="date" name="birthday" id="birthday">
+                      <label for="example-text-input" class="form-control-label">Birthday | MM/d/y</label>
+                      <input class="form-control" type="date" name="birthday" id="birthday" value="{{ Auth::user()->birthday }}">
                     </div>
                   </div>
                 </div>
@@ -116,7 +116,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label">About me</label>
-                      <input class="form-control" type="text" value="" id="about" name="about">
+                      <input class="form-control" type="text" value="{{ Auth::user()->about }}" id="about" name="about">
                     </div>
                   </div>
                 </div>
@@ -126,7 +126,21 @@
       </form>
       <div class="col-md-4">
         <div class="card card-profile">
-          <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top">
+          @if (Auth::user()->city == 'FPT Hanoi')
+            <img src="./assets/img/bg-profile-hn.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Danang')
+            <img src="./assets/img/bg-profile-dn.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Quynhon')
+            <img src="./assets/img/bg-profile-qn.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Hochiminh')
+            <img src="./assets/img/bg-profile-hcm.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Cantho')
+            <img src="./assets/img/bg-profile-ct.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Ville')
+            <img src="./assets/img/bg-profile-vl.jpg" alt="Image placeholder" class="card-img-top">
+            @else
+            <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top">
+          @endif
           <div class="row justify-content-center">
             <div class="col-4 col-lg-4 order-lg-2">
               <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0" style="text-align: center">
@@ -139,16 +153,21 @@
           <div class="card-body pt-0">
             <div class="text-center mt-4">
               <h5>
-                {{ Auth::user()->name }}<span class="font-weight-light">, 21</span>
+                {{ Auth::user()->name }}<span class="font-weight-light">,
+                    @php
+                    $date = new DateTime(Auth::user()->birthday);
+                    $now = new DateTime();
+                    $interval = $now->diff($date);
+                    echo $interval->y;
+                @endphp
+                </span>
               </h5>
               <div class="h6 font-weight-300">
-                <i class="ni location_pin mr-2"></i>Vietnam
+                <i class="ni nilocation_pin mr-2"></i>{{ Auth::user()->city }} <br>
+                {{ Auth::user()->specialized }}
               </div>
               <div class="h6 mt-4">
-                <i class="ni business_briefcase-24 mr-2"></i>{{ Auth::user()->email }}
-              </div>
-              <div>
-                <i class="ni education_hat mr-2"></i>FPT Education
+                <p>{{ Auth::user()->about }}</p>
               </div>
             </div>
           </div>

@@ -43,37 +43,38 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label" >Course Name</label>
-                        <input class="form-control" type="text" name="coursename"  placeholder="Course Name">
+                        <input class="form-control" type="text" name="coursename"  placeholder="Course Name" required>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Category</label>
-                      <select class="form-control" name="categoryid">
-                        @foreach($course as $item)
-                            @if ($item->categoryname == Auth::user()->specialized)
-                                <option value="{{ $item->categoryid }}" selected>{{ $item->categoryname }}</option>
-                            @endif
-                        @endforeach
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Cover</label>
-                        <input class="form-control" type="file"  name="images">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Start Date</label>
-                      <input class="form-control" type="date" name="startdate" >
+                        <label for="example-text-input" class="form-control-label" >Category</label>
+                        <input type="text" class="form-control" name="categoryid" value="{{$categoryid}}" placeholder="{{$categoryname}}" hidden>
+                        <input type="text" class="form-control" value="{{$categoryname}}" readonly>
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Cover</label>
+                        <input class="form-control" type="file"  name="images"  >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Link File Cover</label>
+                        <input class="form-control" type="text"  name="images" placeholder="https://images" >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Start Date</label>
+                      <input class="form-control" type="date" name="startdate" required >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
                       <label for="example-text-input" class="form-control-label">Creator</label>
-                        <input class="form-control" type="text" value="{{ Auth::user()->name}}" name="trainer">
+                        <input class="form-control" type="text" value="{{ Auth::user()->name}}" name="trainer" disabled>
                     </div>
                   </div>
                 </div>
@@ -83,7 +84,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label">Description</label>
-                      <input class="form-control" type="text" value="Description for course"  name="description">
+                      <input class="form-control" type="text" value="Description for course"  name="description" required>
                     </div>
                   </div>
                 </div>
@@ -99,27 +100,13 @@
                       <h6 class="mb-0">Courses</h6>
                     </div>
                     <div class="col-6 text-end">
-                      <a class="btn btn-outline-primary btn-sm mb-0" href="{{ route('allCourse')}}">View All</a>
+                       <a href="/all-course/Category={{$categoryid}}" class="btn btn-secondary btn-sm ms-auto">View All</a>
                     </div>
                   </div>
                 </div>
                 <div class="card-body p-3 pb-0">
                   <ul class="list-group">
-                    {{-- <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                      <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark font-weight-bold text-sm">March, 01, 2020</h6>
-                        <span class="text-xs">#MS-415646</span>
-                      </div>
-                      <div class="d-flex align-items-center text-sm">
-                        <span class="me-2 text-success font-weight-bold">Course 1</span>
-                        <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" href=""><i class="fas fa-file-pdf text-lg me-1"></i> View Course</button>
-                      </div>
-                    </li> --}}
-
-                   {{-- In ra khóa học có categoryid trong bảng category = categoryid trong bảng course --}}
-
                     @foreach ($course as $course)
-                        @if ($course->categoryname == Auth::user()->specialized)
                         <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                             <div class="d-flex flex-column">
                                 <h6 class="mb-1 text-dark font-weight-bold text-sm">{{$course->coursename}}</h6>
@@ -127,12 +114,10 @@
                             </div>
                             <div class="d-flex align-items-center text-sm">
                                 <span class="me-2 text-success font-weight-bold">{{$course->trainer}} </span>
-                                <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" href="{{"manage-topic/".$course['courseid']}}"><i class="fas fa-file-pdf text-lg me-1"></i>View Course</a>
+                                <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" href="{{"/manage-topic/".$course['courseid']}}"><i class="fas fa-file-pdf text-lg me-1"></i>View Course</a>
                             </div>
                         </li>
-                        @endif
                     @endforeach
-
                   </ul>
                 </div>
               </div>
