@@ -166,6 +166,13 @@
           </div>
         </div>
     </div>
+    <div class="sidenav-footer mx-3 ">
+        <div class="card card-plain shadow-none" id="sidenavCard">
+          <div class="card-body text-center p-3 w-100 pt-0">
+              <a class="btn btn-primary btn-sm mb-0 w-100" href="#" type="button">Logout</a>
+          </div>
+        </div>
+    </div>
   </aside>
 
 

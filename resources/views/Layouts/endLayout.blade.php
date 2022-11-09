@@ -37,7 +37,10 @@
         // Data user
         labels: ["Courses",'Topic', 'Trainee', 'Enroll'],
         datasets: [{
-          label: "Data",
+          label: "Trainee Enroll",
+          tension: 0.4,
+          borderWidth: 0,
+          pointRadius: 0,
           borderColor: "#5e72e4",
           pointBorderColor: "#FFF",
           pointBackgroundColor: "#5e72e4",
