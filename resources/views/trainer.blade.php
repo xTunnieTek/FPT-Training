@@ -28,7 +28,11 @@
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
-                              <img src="{{ $user->avatar_original }}" class="avatar avatar-sm me-3" alt="user1">
+                                @if(empty($user->avatar_original))
+                                    <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="avatar avatar-sm me-3" >
+                                @elseif(!empty($user->avatar_original))
+                                    <img src="{{ $user->avatar_original }}" class="avatar avatar-sm me-3" >
+                                @endif
                             </div>
                             <div class="d-flex flex-column justify-content-center">
                               <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
@@ -48,9 +52,12 @@
                           <span class="text-secondary text-xs font-weight-bold" style="	text-transform: uppercase;">{{ $user->role }}</span>
                         </td>
                         <td class="align-middle">
-                          <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
+                            <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                <i class="fas fa-user-edit"></i>
+                            </a>
+                            <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                       </tr>
                     @endif
@@ -62,13 +69,13 @@
         </div>
       </div>
         <div class="col-4">
-            <form method="POST">
+            <form method="post" enctype="multipart/form-data" action="{{route('addTrainer')}}">
                 @csrf
             <div class="card">
               <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                   <p class="mb-0">Create An Account For Trainer</p>
-                  <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Create</a>
+                  <button class="btn btn-primary btn-sm ms-auto">Create</button>
                 </div>
               </div>
               <div class="card-body">
@@ -121,9 +128,9 @@
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Department/Specialized</label>
                         <select name="specialized" id="specialized" class="form-control" >
-                            <option value="IT">Information Technology</option>
+                            <option value="Information Technology">Information Technology</option>
                             <option value="Business">Business</option>
-                            <option value="Design">Design Graphics</option>
+                            <option value="Graphic Design">Design Graphics</option>
                             <option value="Training">Training Department</option>
                             <option value="Admin">Administrators</option>
                           </select>

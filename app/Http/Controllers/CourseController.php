@@ -24,8 +24,7 @@ class CourseController extends Controller
     public function getAllCourse($categoryid){
         $category = Course::find($categoryid);
         $course = course::join('category', 'courses.categoryid', '=', 'category.categoryid')->select('courses.*', 'categoryname as categoryname')->where('courses.categoryid', $categoryid)->get();
-        return view('coursetable', ['course' => $course, 'category' => $category]);
-
+        return view('coursetable', ['course' => $course, 'category' => $category,  'categoryid' => $categoryid]);
     }
 
 

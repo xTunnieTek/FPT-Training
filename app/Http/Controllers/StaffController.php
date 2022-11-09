@@ -25,6 +25,19 @@ class StaffController extends Controller
         return view('editStaff', compact('user'));
     }
 
+    // Add
+    public function add(Request $request){
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'staff';
+        $user->city = $request->city;
+        $user->specialized = $request->specialized;
+        $user->save();
+        return redirect()->back();
+    }
+
     // Update
     public function update(Request $request, $id)
     {

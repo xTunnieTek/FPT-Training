@@ -10,12 +10,25 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LearningController;
+use App\Http\Controllers\TraineeController;
+use App\Http\Controllers\TrainingController;
+
 
 
 Route::get('/', function () {
     return view('login');
 });
 
+Route::get('/123', function () {
+    return view('learning-3');
+});
+
+
+        // Learning
+        Route::get('/learning', [LearningController::class, 'getCategory'])->name('learning');
+        Route::get('/learning/{id}', [LearningController::class, 'getCourse'])->name('learningCourse');
 
 
 /*
@@ -42,8 +55,8 @@ Route::prefix('google')->name('google.')->group( function(){
 
 
 Route::get('/login', [LoginController::class, 'getLogin'])->name('login');
-Route::post('/login', [LoginController::class, 'postLogin'])->name('login');
-Route::post('/login', [SignupController::class, 'postSignup'])->name('signup');
+Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
+// Route::post('/login', [SignupController::class, 'postSignup'])->name('signup');
 
 
 // Middeleware
@@ -58,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit-trainer/{id}', [TrainerController::class, 'edit'])->name('editTrainer');
         Route::post('/edit-trainer/{id}', [TrainerController::class, 'update'])->name('updateTrainer');
         Route::get('/delete-trainer/{id}', [TrainerController::class, 'delete'])->name('deleteTrainer');
+        Route::post('/add-trainer', [TrainerController::class, 'add'])->name('addTrainer');
 
         // Staff
         Route::get('/manage-staff', [StaffController::class, 'getStaff'])->name('manageStaff');
@@ -65,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit-staff/{id}', [StaffController::class, 'edit'])->name('editStaff');
         Route::post('/edit-staff/{id}', [StaffController::class, 'update'])->name('updateStaff');
         Route::get('/delete-staff/{id}', [StaffController::class, 'delete'])->name('deleteStaff');
+        Route::post('/add-staff', [StaffController::class, 'add'])->name('addStaff');
 
         // Category
         Route::get('/manage-category', [CategoryController::class, 'getCategory'])->name('manageCategory');
@@ -81,16 +96,35 @@ Route::group(['middleware' => 'auth'], function () {
         // Profile
         Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
         Route::post('updateProfile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
-        
+
 
         //Topic
         Route::get('/manage-topic/{id}', [TopicController::class, 'getTopic'])->name('manageTopic');
-        Route::get('/all-topic', [TopicController::class, 'getAllTopic'])->name('allTopic');
+        Route::get('/all-topic/{id}', [TopicController::class, 'getAllTopic'])->name('allTopic');
         Route::get('/edit-topic/{id}', [TopicController::class, 'edit'])->name('editTopic');
         Route::post('/edit-topic/{id}', [TopicController::class, 'update'])->name('updateTopic');
-        Route::get('/delete-topic/{id}', [TopicController::class, 'delete'])->name('deleteTopic');
+        Route::get('/delete-topic/{id}', [TopicController::class, 'deleteTopic'])->name('deleteTopic');
         Route::post('/add-topic', [TopicController::class, 'addTopic'])->name('addTopic');
 
+
+        // user
+        Route::get('/manage-user', [UsersController::class, 'getUsers'])->name('manageUser');
+        Route::get('/all-user', [UsersController::class, 'getAllUsers'])->name('allUser');
+        Route::get('/manage-user/{id}/edit', [UsersController::class, 'editUser'])->name('editUser');
+        Route::post('/manage-user/{id}/edit', [UsersController::class, 'updateUser'])->name('updateUser');
+        Route::get('/manage-user/{id}/delete', [UsersController::class, 'deleteUser'])->name('deleteUser');
+
+
+        // Trainee
+        Route::get('/learning-ne', [TraineeController::class, 'addGoogleId'])->name('updateTraining');
+        Route::get('/trainee/{google_id}', [TraineeController::class, 'getTraineeInfo'])->name('trainee');
+        Route::post('/trainee/{google_id}/edit', [TraineeController::class, 'updateTraineeInfo'])->name('updateTrainee');
+
+        //Training
+        Route::get('/training/{google_id}/{courseid}', [TrainingController::class, 'addEnroll'])->name('training');
+        Route::get('/mycourse', [TrainingController::class, 'getEnrollList'])->name('mycourse');
+        Route::get('/mycourse/{courseid}', [TrainingController::class, 'getTopicList'])->name('mycourseDetail');
+        Route::get('/mycourse/{courseid}/Lab={topicid}', [TrainingController::class, 'getTopicDetail'])->name('mycourseTopicDetail');
 });
 
 

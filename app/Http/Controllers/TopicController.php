@@ -14,15 +14,16 @@ use App\Models\Topic;
 class TopicController extends Controller
 {
     public function getTopic($courseid){
-        $course = course::join('category', 'courses.categoryid', '=', 'category.categoryid')->select('courses.*', 'categoryname as categoryname')->where('courses.courseid', $courseid)->get();
-        $topic = topic::join('courses', 'topics.courseid', '=', 'courses.courseid')->select('topics.*', 'courses.*')->where('topics.courseid', $courseid)->get();
-        // return view('topic', ['topic' => $topic]);
-        return view('topic', ['topic' => $topic, 'course' => $course]);
+        $course = Course::find($courseid);
+        $coursename = Course::find($courseid) -> coursename;
+        $topic = Topic::join('courses', 'topics.courseid', '=', 'courses.courseid')->select('topics.*', 'courses.*')->where('topics.courseid', $courseid)->get();
+        return view('topic', ['course' => $course, 'topic' => $topic, 'courseid' => $courseid]);
     }
 
-    public function getAllTopic(){
-        $topic = topic::join('courses', 'topics.courseid', '=', 'courses.courseid')->select('topics.*', 'courses.*')->get();
-        return view('topictable', ['topic' => $topic]);
+    public function getAllTopic($courseid){
+        $course = Course::find($courseid);
+        $topic = topic::join('courses', 'topics.courseid', '=', 'courses.courseid')->select('topics.*', 'courses.*')->where('topics.courseid', $courseid)->get();
+        return view('topictable', ['topic' => $topic, 'course' => $course ,'courseid' => $courseid]);
     }
 
     public function addTopic(Request $request){
@@ -54,6 +55,6 @@ class TopicController extends Controller
     public function deleteTopic($topicid){
         $topic = Topic::find($topicid);
         $topic->delete();
-        return redirect()->route('manageTopic')->with('success', 'Topic Deleted Successfully!');
+        return redirect()->back();
     }
 }

@@ -74,7 +74,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label">Creator</label>
-                        <input class="form-control" type="text" value="{{ Auth::user()->name}}" name="trainer" disabled>
+                        <input class="form-control" type="text" value="{{ Auth::user()->name}}" name="trainer" >
                     </div>
                   </div>
                 </div>

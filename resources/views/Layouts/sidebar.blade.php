@@ -11,7 +11,63 @@
       <hr class="horizontal dark mt-0">
       <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
+        @if ( Auth::user()->role == 'trainee')
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('learning') }}">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Learning Space</span>
+          </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('mycourse')}}">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-collection text-warning text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">My Course</span>
+            </a>
+          </li>
+          @php
+            // Get id trainee
+            $trainee = Auth::user()->google_id;
+          @endphp
           <li class="nav-item">
+            <a class="nav-link" href="/trainee/{{$trainee}}">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Training Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{ route('profile') }}">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
+            </a>
+          </li>
+          {{-- Nếu google_id trong bảng trainingid == google_id trong bảng user thì show --}}
+          @php
+            $user = Auth::user()->google_id;
+            $trainee = DB::table('trainingid')->where('google_id', $user)->first();
+          @endphp
+         @if ($trainee == null)
+         <li class="nav-item">
+            <a class="nav-link " href="{{ route('updateTraining') }}">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Update Profile</span>
+            </a>
+          </li>
+         @else
+
+         @endif
+
+        @elseif (Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff')
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -80,6 +136,14 @@
                   <span class="nav-link-text ms-1">Manage Trainer</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{ route('manageUser')}}">
+                  <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Manage Users</span>
+                </a>
+              </li>
             @elseif (Auth::user()->role == 'staff')
               <li class="nav-item">
                 <a class="nav-link " href="{{ route('manageTrainer')}}">
@@ -91,6 +155,7 @@
               </li>
             @endif
 
+        @endif
         </ul>
       </div>
     <div class="sidenav-footer mx-3 ">

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
+
 class TrainerController extends Controller
 {
     public function getTrainer(){
@@ -16,6 +17,19 @@ class TrainerController extends Controller
     public function getAllTrainer(){
         $trainers = User::where('role', 'trainer')->get();
         return view('allTrainer', compact('trainers'));
+    }
+
+    // Add
+    public function add(Request $request){
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = 'trainer';
+        $user->city = $request->city;
+        $user->specialized = $request->specialized;
+        $user->save();
+        return redirect()->back();
     }
 
     // Edit

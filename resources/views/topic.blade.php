@@ -49,18 +49,14 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label" >Courses</label>
-                      {{-- <input type="text" class="form-control" name="courseid" value="a" d> --}}
-                        <select class="form-control" name="courseid">
-                            @foreach ($course as $item )
-                                <option value="{{ $item->courseid }}">{{ $item->coursename }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" value="{{$course->courseid}}" name="courseid" hidden>
+                        <input type="text" class="form-control" value="{{$course->coursename}}" name="courseid" disabled>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label">Link Video</label>
-                        <input class="form-control" type="text" id="videoUrl" name="link">
+                        <input class="form-control" type="text" id="videoUrl" placeholder="https://www.youtube.com/embed/" name="link">
                     </div>
                   </div>
                 </div>
@@ -93,7 +89,7 @@
                     </div>
                     <div class="col-6 text-end">
                     {{-- <button class="btn btn-outline-primary btn-sm mb-0" onclick="showVideo()">Preview</button> --}}
-                      {{-- <a class="btn btn-outline-success btn-sm mb-0" href="{{ route('allCourse')}}">View All</a> --}}
+                      <a class="btn btn-outline-success btn-sm mb-0" href="/all-topic/{{$courseid}}">View All</a>
                     </div>
                   </div>
                 </div>

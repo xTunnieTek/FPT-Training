@@ -12,7 +12,10 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Courses</p>
                   <h5 class="font-weight-bolder">
-                    20
+                    @php
+                        $courses = DB::table('courses')->count();
+                        echo $courses;
+                    @endphp
                   </h5>
                 </div>
               </div>
@@ -31,9 +34,12 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Trainee Enrolled</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Users</p>
                   <h5 class="font-weight-bolder">
-                    32
+                    @php
+                        $users = DB::table('users')->count();
+                        echo $users;
+                    @endphp
                   </h5>
                 </div>
               </div>
@@ -52,9 +58,12 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Enroll</p>
                   <h5 class="font-weight-bolder">
-                    + 51
+                    @php
+                        $enroll = DB::table('enroll')->count();
+                        echo $enroll;
+                    @endphp
                   </h5>
                 </div>
               </div>
@@ -73,9 +82,12 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Completed the course</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Trainee</p>
                   <h5 class="font-weight-bolder">
-                    31
+                    @php
+                        $trainee = DB::table('trainingid')->count();
+                        echo $trainee;
+                    @endphp
                   </h5>
                 </div>
               </div>
@@ -160,132 +172,51 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="table align-items-center ">
+            <table class="table align-items-center h-100">
               <tbody>
+                  @php
+                        $course = DB::table('courses')->get();
+                  @endphp
+                {{-- Print max 04 course --}}
+                @foreach ($course as $item)
                 <tr>
-                  <td class="w-30">
-                    <div class="d-flex px-2 py-1 align-items-center">
-                      <div>
-                        <img src="./assets/img/icons/flags/US.png" alt="Course flag">
-                      </div>
-                      <div class="ms-4">
-                        <p class="text-xs font-weight-bold mb-0">Course:</p>
-                        <h6 class="text-sm mb-0">United States</h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Trainee:</p>
-                      <h6 class="text-sm mb-0">2500</h6>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Topic:</p>
-                      <h6 class="text-sm mb-0">15</h6>
-                    </div>
-                  </td>
-                  <td class="align-middle text-sm">
-                    <div class="col text-center">
-                      <p class="text-xs font-weight-bold mb-0">Process:</p>
-                      <h6 class="text-sm mb-0">29.9%</h6>
-                    </div>
-                  </td>
+                    <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                          <div>
+                            <img src="./assets/img/icons/flags/GB.png" alt="Course flag">
+                          </div>
+                          <div class="ms-4">
+                            <p class="text-xs font-weight-bold mb-0">Course ID:</p>
+                            <h6 class="text-sm mb-0">{{$item->courseid}}</h6>
+                          </div>
+                        </div>
+                    </td>
+                    <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                          <div class="ms-4">
+                            <p class="text-xs font-weight-bold mb-0">Course Name:</p>
+                            <h6 class="text-sm mb-0">{{$item->coursename}}</h6>
+                          </div>
+                        </div>
+                    </td>
+                    <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                          <div class="ms-4">
+                            <p class="text-xs font-weight-bold mb-0">Start Date:</p>
+                            <h6 class="text-sm mb-0">{{$item->startdate}}</h6>
+                          </div>
+                        </div>
+                    </td>
+                    <td class="w-30">
+                        <div class="d-flex px-2 py-1 align-items-center">
+                          <div class="ms-4">
+                            <p class="text-xs font-weight-bold mb-0">Trainer:</p>
+                            <h6 class="text-sm mb-0">{{$item->trainer}}</h6>
+                          </div>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                  <td class="w-30">
-                    <div class="d-flex px-2 py-1 align-items-center">
-                      <div>
-                        <img src="./assets/img/icons/flags/DE.png" alt="Course flag">
-                      </div>
-                      <div class="ms-4">
-                        <p class="text-xs font-weight-bold mb-0">Course:</p>
-                        <h6 class="text-sm mb-0">Germany</h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Trainee:</p>
-                      <h6 class="text-sm mb-0">3.900</h6>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Topic:</p>
-                      <h6 class="text-sm mb-0">10</h6>
-                    </div>
-                  </td>
-                  <td class="align-middle text-sm">
-                    <div class="col text-center">
-                      <p class="text-xs font-weight-bold mb-0">Process:</p>
-                      <h6 class="text-sm mb-0">40.22%</h6>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-30">
-                    <div class="d-flex px-2 py-1 align-items-center">
-                      <div>
-                        <img src="./assets/img/icons/flags/GB.png" alt="Course flag">
-                      </div>
-                      <div class="ms-4">
-                        <p class="text-xs font-weight-bold mb-0">Course:</p>
-                        <h6 class="text-sm mb-0">Great Britain</h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Trainee:</p>
-                      <h6 class="text-sm mb-0">1.400</h6>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Topic:</p>
-                      <h6 class="text-sm mb-0">20</h6>
-                    </div>
-                  </td>
-                  <td class="align-middle text-sm">
-                    <div class="col text-center">
-                      <p class="text-xs font-weight-bold mb-0">Process:</p>
-                      <h6 class="text-sm mb-0">23.44%</h6>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-30">
-                    <div class="d-flex px-2 py-1 align-items-center">
-                      <div>
-                        <img src="./assets/img/icons/flags/BR.png" alt="Course flag">
-                      </div>
-                      <div class="ms-4">
-                        <p class="text-xs font-weight-bold mb-0">Course:</p>
-                        <h6 class="text-sm mb-0">Brasil</h6>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Trainee:</p>
-                      <h6 class="text-sm mb-0">562</h6>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <p class="text-xs font-weight-bold mb-0">Topic:</p>
-                      <h6 class="text-sm mb-0">15</h6>
-                    </div>
-                  </td>
-                  <td class="align-middle text-sm">
-                    <div class="col text-center">
-                      <p class="text-xs font-weight-bold mb-0">Process:</p>
-                      <h6 class="text-sm mb-0">32.14%</h6>
-                    </div>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -298,7 +229,28 @@
           </div>
           <div class="card-body p-3">
             <ul class="list-group">
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                {{-- List all users role trainer --}}
+                @php
+                    $trainer = DB::table('users')->where('role', 'trainer')->get();
+                @endphp
+                @foreach ($trainer as $item)
+                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                    <div class="d-flex align-items-center">
+                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
+                        <i class="ni ni-satisfied text-white opacity-10"></i>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h6 class="mb-1 text-dark text-sm">{{$item->name}}</h6>
+                        <span class="text-xs">Top Trainer</span>
+                    </div>
+                    </div>
+                    <div class="d-flex">
+                        <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+              {{-- <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                 <div class="d-flex align-items-center">
                   <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
                     <i class="ni ni-satisfied text-white opacity-10"></i>
@@ -311,49 +263,7 @@
                 <div class="d-flex">
                   <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
                 </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-satisfied text-white opacity-10"></i>
-                  </div>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Nguyen Thai Cuong</h6>
-                    <span class="text-xs">210 Topics in Course</span>
-                  </div>
-                </div>
-                <div class="d-flex">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-satisfied text-white opacity-10"></i>
-                  </div>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Le Van Thuan</h6>
-                    <span class="text-xs">208 Topics in Course</span>
-                  </div>
-                </div>
-                <div class="d-flex">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                </div>
-              </li>
-              <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-satisfied text-white opacity-10"></i>
-                  </div>
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Bui Duy Linh</h6>
-                    <span class="text-xs font-weight-bold">5</span>
-                  </div>
-                </div>
-                <div class="d-flex">
-                  <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                </div>
-              </li>
+              </li> --}}
             </ul>
           </div>
         </div>

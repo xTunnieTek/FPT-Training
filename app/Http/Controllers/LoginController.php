@@ -40,12 +40,10 @@ class LoginController extends Controller
                     'email' => $user->getEmail(),
                     'avatar_original' => $user->getAvatar(),
                     'password' => Hash::make($user->getName().'@'.$user->getId()),
-                    'specialized'=> 'Trainer',
                     'email_verified_at' => now(),
-                    'role'=> 'staff',
                 ]);
-                // Xét 3 ký tự liên tiêp gần giống trong chuỗi của email của user và in ra nếu có BHA thì specialized = 'IT' nếu có BHB thì specialized = 'Business' nếu có BHG thì specialized = 'Graphic'
                 $email = $user->getEmail();
+                $role = 'trainee';
                 $specialized = '';
                 if (strpos($email, 'BHA') !== false) {
                     $specialized = 'Information Technology';
@@ -55,6 +53,7 @@ class LoginController extends Controller
                     $specialized = 'Graphic Design';
                 }
                 $saveUser->specialized = $specialized;
+                $saveUser->role = $role;
                 $saveUser->save();
                 Auth::login($saveUser);
                 return redirect()->route('dashboard');

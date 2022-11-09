@@ -8,14 +8,20 @@
       <div class="row gx-4">
         <div class="col-auto">
           <div class="avatar avatar-xl position-relative">
-            <img src="{{ Auth::user()->avatar_original}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            @if(empty($user->avatar_original))
+            <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="w-100 border-radius-lg shadow-sm" >
+        @elseif(!empty($user->avatar_original))
+            <img src="{{ $user->avatar_original }}" class="w-100 border-radius-lg shadow-sm" >
+        @endif
           </div>
         </div>
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
                 {{ Auth::user()->name }}
-                <p style="text-transform:uppercase ">{{ Auth::user()->role}}</p>
+                <p style="text-transform:uppercase ">
+                    {{ Auth::user()->role}}
+                </p>
             </h5>
             <p class="mb-0 font-weight-bold text-sm">
                 {{ Auth::user()->email }}
@@ -44,7 +50,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label" >Username</label>
-                      <input class="form-control" type="password" value="{{ Auth::user()->id }}@2001{{ Auth::user()->google_id }}@2001{{ Auth::user()->id }}"  >
+                      <input class="form-control" type="password" value="{{ Auth::user()->id }}@2001{{ Auth::user()->google_id }}@2001{{ Auth::user()->id }}"  disabled>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -98,14 +104,14 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Department/Specialized</label>
-                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}">
+                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}" disabled>
                             {{-- Đã chọn --}}
                             <option value="{{ Auth::user()->specialized}}" selected>{{ Auth::user()->specialized}}</option>
-                            <option value="IT">Information Technology</option>
+                            <option value="Information Technology">Information Technology</option>
                             <option value="Business">Business</option>
-                            <option value="Design">Design Graphics</option>
+                            <option value="Graphic Design">Graphic Design</option>
                             <option value="Training">Training Department</option>
-                            <option value="Admin">Administrators</option>
+                            <option value="Administrators">Administrators</option>
                           </select>
                     </div>
                     </div>
@@ -145,7 +151,11 @@
             <div class="col-4 col-lg-4 order-lg-2">
               <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0" style="text-align: center">
                 <a href="javascript:;" style="text-align: center">
-                  <img src="{{ Auth::user()->avatar_original }}" class="rounded-circle img-fluid border border-3 border-white" >
+                    @if(empty($user->avatar_original))
+                    <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="rounded-circle img-fluid border border-3 border-white" >
+                @elseif(!empty($user->avatar_original))
+                    <img src="{{ $user->avatar_original }}" class="rounded-circle img-fluid border border-3 border-white" >
+                @endif
                 </a>
               </div>
             </div>

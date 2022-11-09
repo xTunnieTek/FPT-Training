@@ -37,6 +37,11 @@
           </div>
         </div>
         <a class="nav-link " href="{{ route('profile') }}">
+            {{-- @if(!empty($user->avatar_original))
+                <img src="{{ $user->avatar_original }}" class="img-avatar" >
+            @elseif(empty($user->avatar_original))
+                <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="img-avatar" >
+            @endif --}}
             <img src="{{Auth::user()->avatar_original }}" class="img-avatar">
         </a>
       </div>
