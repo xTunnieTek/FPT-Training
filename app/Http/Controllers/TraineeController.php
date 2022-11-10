@@ -16,10 +16,27 @@ class TraineeController extends Controller
     {
         // Get google_id từ bảng users
         $google_id = Auth::user()->google_id;
-        // Thêm google_id vào bảng trainingid
-        $trainee = new Trainee;
-        $trainee->google_id = $google_id;
-        $trainee->save();
+        // Nếu google_id = null thì thông báo lỗi
+        if($google_id == null){
+            time_nanosleep(0, 500000000);
+            return redirect()->back()->with('error', 'Bạn chưa đăng nhập bằng google')->with('time', 1)->with('url', '/logout');
+        }
+        else{
+            // Nếu google_id đã tồn tại thì thông báo lỗi
+            $checkGoogleId = Trainee::where('google_id', $google_id)->first();
+            if($checkGoogleId){
+                return redirect()->back()->with('error', 'Google ID đã tồn tại');
+            }
+            else{
+                $trainee = new Trainee;
+                $trainee->google_id = $google_id;
+                $trainee->save();
+            }
+            return redirect()->back();
+        }
+        // $trainee = new Trainee;
+        // $trainee->google_id = $google_id;
+        // $trainee->save();
         return redirect('/dashboard');
     }
 

@@ -68,7 +68,12 @@ class LoginController extends Controller
             }
             Auth::loginUsingId($saveUser->id);
             $success='Logged Successfully!';
-            return redirect()->route('dashboard')->with('success',$success);
+            if(Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff'){
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('learning');
+            }
+
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -80,7 +85,11 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $success='Logged Successfully!';
-            return redirect()->route('dashboard')->with('success',$success);
+            if(Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff'){
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('learning');
+            }
         }else{
             $error='Email or Password is incorrect!';
             return redirect()->route('login')->with('error',$error);

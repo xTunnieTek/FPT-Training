@@ -28,11 +28,17 @@
       <div class="form-container sign-in-container">
         <form  method="POST" action="{{route('postLogin')}}" enctype="multipart/form-data">
           @csrf
+            <span style="color: red">
+                @if (session('error'))
+                    {{ session('error') }}
+                @endif
+            </span>
           <img src="/assets/img/fpt.png"  class="logo01">
           <div class="social-container">
             <a href="{{ route('google.login') }}" class="social"><i class="fab fa-google-plus-g"></i></a>
           </div>
           <span>or use your account</span>
+
           <input type="email" placeholder="Email" id="email" name="email"/>
           <input type="password" placeholder="Password" id="password" name="password" />
           <a id="forgot">Forgot your password?</a>
@@ -57,6 +63,7 @@
         </div>
       </div>
     </div>
+
     <script>
       const signUpButton = document.getElementById("postRegister");
       const signInButton = document.getElementById("postLogin");

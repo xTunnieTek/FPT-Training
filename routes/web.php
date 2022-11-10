@@ -21,9 +21,6 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/123', function () {
-    return view('learning-3');
-});
 
 
         // Learning
@@ -125,6 +122,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/mycourse', [TrainingController::class, 'getEnrollList'])->name('mycourse');
         Route::get('/mycourse/{courseid}', [TrainingController::class, 'getTopicList'])->name('mycourseDetail');
         Route::get('/mycourse/{courseid}/Lab={topicid}', [TrainingController::class, 'getTopicDetail'])->name('mycourseTopicDetail');
+
+
+        // Learning
+        Route::get('/learning', [LearningController::class, 'getCategory'])->name('learning');
+        Route::get('/learning/{id}', [LearningController::class, 'getCourse'])->name('learningCourse');
+
 });
 
 

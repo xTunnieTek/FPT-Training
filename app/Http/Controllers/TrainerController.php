@@ -21,15 +21,23 @@ class TrainerController extends Controller
 
     // Add
     public function add(Request $request){
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = 'trainer';
-        $user->city = $request->city;
-        $user->specialized = $request->specialized;
-        $user->save();
-        return redirect()->back();
+        // Nếu email đã tồn tại thì thông báo lỗi
+        $checkEmail = User::where('email', $request->email)->first();
+        if($checkEmail){
+            return redirect()->back()->with('error', 'Email đã tồn tại');
+        }
+        else
+        {
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = 'trainer';
+            $user->city = $request->city;
+            $user->specialized = $request->specialized;
+            $user->save();
+        }
+        return redirect()->back()->with('success', 'Đã khởi tạo thành công');
     }
 
     // Edit

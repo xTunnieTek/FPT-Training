@@ -12,58 +12,56 @@
       <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
         @if ( Auth::user()->role == 'trainee')
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('learning') }}">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Learning Space</span>
-          </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('mycourse')}}">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-collection text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">My Course</span>
-            </a>
-          </li>
-          @php
-            // Get id trainee
-            $trainee = Auth::user()->google_id;
-          @endphp
-          <li class="nav-item">
-            <a class="nav-link" href="/trainee/{{$trainee}}">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Training Profile</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{ route('profile') }}">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Profile</span>
-            </a>
-          </li>
-          {{-- Nếu google_id trong bảng trainingid == google_id trong bảng user thì show --}}
           @php
             $user = Auth::user()->google_id;
             $trainee = DB::table('trainingid')->where('google_id', $user)->first();
           @endphp
          @if ($trainee == null)
          <li class="nav-item">
-            <a class="nav-link " href="{{ route('updateTraining') }}">
+            <a class="nav-link active" href="{{ route('updateTraining') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Update Profile</span>
+              <span class="nav-link-text ms-1">Update Training</span>
             </a>
           </li>
          @else
-
+         <li class="nav-item">
+            <a class="nav-link" href="{{ route('learning') }}">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Learning Space</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('mycourse')}}">
+                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="ni ni-collection text-warning text-sm opacity-10"></i>
+                </div>
+                <span class="nav-link-text ms-1">My Course</span>
+              </a>
+            </li>
+            @php
+              // Get id trainee
+              $trainee = Auth::user()->google_id;
+            @endphp
+            <li class="nav-item">
+              <a class="nav-link" href="/trainee/{{$trainee}}">
+                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
+                </div>
+                <span class="nav-link-text ms-1">Training Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="{{ route('profile') }}">
+                <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
+                </div>
+                <span class="nav-link-text ms-1">Profile</span>
+              </a>
+            </li>
          @endif
 
         @elseif (Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff')
@@ -163,13 +161,6 @@
           <div class="card-body text-center p-3 w-100 pt-0">
             {{-- Logout --}}
               <a class="btn btn-primary btn-sm mb-0 w-100" href="{{ route('logout') }}" type="button">Logout</a>
-          </div>
-        </div>
-    </div>
-    <div class="sidenav-footer mx-3 ">
-        <div class="card card-plain shadow-none" id="sidenavCard">
-          <div class="card-body text-center p-3 w-100 pt-0">
-              <a class="btn btn-primary btn-sm mb-0 w-100" href="#" type="button">Logout</a>
           </div>
         </div>
     </div>
