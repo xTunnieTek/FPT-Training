@@ -21,4 +21,7 @@ class Topic extends Model
         'link',
     ];
 
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }
