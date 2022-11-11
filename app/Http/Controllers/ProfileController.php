@@ -18,23 +18,24 @@ class ProfileController extends Controller
 
     public function updateUserInfo(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-        ]);
-
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->birthday = $request->birthday;
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->city = $request->city;
-        $user->specialized = $request->specialized;
+        $user->phone = $request->phone;
+        $user->birthday = $request->birthday;
         $user->about = $request->about;
+        $user->specialized = $request->specialized;
         $user->save();
+        return redirect()->route('profile');
+    }
 
-        return redirect()->route('updateProfile')->with('success', 'Profile updated successfully');
+    public function calAge($birthday)
+    {
+        $date = date_create($birthday);
+        $now = date_create('today');
+        return date_diff($date, $now)->y;
     }
 
 //   Delete
@@ -44,6 +45,7 @@ class ProfileController extends Controller
         $user->delete();
         return redirect()->route('dashboard')->with('success', 'User deleted successfully');
     }
+
 
 }
 

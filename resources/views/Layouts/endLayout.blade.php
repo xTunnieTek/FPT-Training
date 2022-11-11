@@ -1,35 +1,59 @@
 <!-- === -->
 
   <!--   Core JS Files   -->
-  <script src="./assets/js/core/popper.min.js"></script>
-  <script src="./assets/js/core/bootstrap.min.js"></script>
-  <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="./assets/js/plugins/chartjs.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="assets/js/plugins/chartjs.min.js"></script>
   <script>
+
+    @php
+        $course = DB::table('courses')->get();
+        $count = count($course);
+
+        $topic = DB::table('topics')->get();
+        $countTopic = count($topic);
+
+        $trainee = DB::table('trainingid')->get();
+        $countTrainee = count($trainee);
+
+        $enroll = DB::table('enroll')->get();
+        $countenroll = count($enroll);
+
+
+    @endphp
+
+
+
     var ctx1 = document.getElementById("chart-line").getContext("2d");
-
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
     gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
     gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
     gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
     new Chart(ctx1, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        // Data user
+        labels: ["Courses",'Topic', 'Trainee', 'Enroll'],
         datasets: [{
           label: "Trainee Enroll",
           tension: 0.4,
           borderWidth: 0,
           pointRadius: 0,
           borderColor: "#5e72e4",
-          backgroundColor: gradientStroke1,
-          borderWidth: 3,
+          pointBorderColor: "#FFF",
+          pointBackgroundColor: "#5e72e4",
+          pointHoverBackgroundColor: "#5e72e4",
+          pointHoverBorderColor: "#5e72e4",
+          pointBorderWidth: 10,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 2,
           fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
+          backgroundColor: gradientStroke1,
+          borderWidth: 2,
+          data: [{{$count}}, {{$countTopic}}, {{$countTrainee}}, {{$countenroll}}],
         }],
       },
       options: {
@@ -59,7 +83,7 @@
               color: '#fbfbfb',
               font: {
                 size: 11,
-                family: "Open Sans",
+                family: "sans-serif",
                 style: 'normal',
                 lineHeight: 2
               },
@@ -79,7 +103,7 @@
               padding: 20,
               font: {
                 size: 11,
-                family: "Open Sans",
+                family: "sans-serif",
                 style: 'normal',
                 lineHeight: 2
               },
@@ -88,6 +112,7 @@
         },
       },
     });
+
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -102,6 +127,10 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="./assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script>
+    const toastElList = document.querySelectorAll('.toast')
+    const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
+  </script>
 </body>
 
 </html>

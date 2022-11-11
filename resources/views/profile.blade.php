@@ -8,14 +8,20 @@
       <div class="row gx-4">
         <div class="col-auto">
           <div class="avatar avatar-xl position-relative">
-            <img src="{{ Auth::user()->avatar_original}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            @if(empty($user->avatar_original))
+            <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="w-100 border-radius-lg shadow-sm" >
+        @elseif(!empty($user->avatar_original))
+            <img src="{{ $user->avatar_original }}" class="w-100 border-radius-lg shadow-sm" >
+        @endif
           </div>
         </div>
         <div class="col-auto my-auto">
           <div class="h-100">
             <h5 class="mb-1">
                 {{ Auth::user()->name }}
-                <p style="text-transform	:uppercase ">{{ Auth::user()->role}}</p>
+                <p style="text-transform:uppercase ">
+                    {{ Auth::user()->role}}
+                </p>
             </h5>
             <p class="mb-0 font-weight-bold text-sm">
                 {{ Auth::user()->email }}
@@ -28,14 +34,14 @@
   <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-8">
-            <form method="POST">
+            <form method="post" action="{{ route('updateProfile')}}" enctype="multipart/form-data" >
                 @csrf
             <div class="card">
               <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                   <p class="mb-0">Edit Profile</p>
-                  <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Update</a>
-                  {{-- <button class="btn btn-primary btn-sm ms-auto">Update</button> --}}
+                  {{-- <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Update</a> --}}
+                  <button class="btn btn-primary btn-sm ms-auto">Update</button>
                 </div>
               </div>
               <div class="card-body">
@@ -44,7 +50,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label" >Username</label>
-                      <input class="form-control" type="password" value="{{ Auth::user()->id }}@2001{{ Auth::user()->google_id }}@2001{{ Auth::user()->id }}"  >
+                      <input class="form-control" type="password" value="{{ Auth::user()->id }}@2001{{ Auth::user()->google_id }}@2001{{ Auth::user()->id }}"  disabled>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -61,8 +67,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Birthday</label>
-                      <input class="form-control" type="date" name="birthday" id="birthday">
+                      <label for="example-text-input" class="form-control-label">Birthday | MM/d/y</label>
+                      <input class="form-control" type="date" name="birthday" id="birthday" value="{{ Auth::user()->birthday }}">
                     </div>
                   </div>
                 </div>
@@ -98,18 +104,17 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Department/Specialized</label>
-                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}">
+                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}" disabled>
                             {{-- Đã chọn --}}
                             <option value="{{ Auth::user()->specialized}}" selected>{{ Auth::user()->specialized}}</option>
-                            <option value="IT">Information Technology</option>
+                            <option value="Information Technology">Information Technology</option>
                             <option value="Business">Business</option>
-                            <option value="Design">Design Graphics</option>
+                            <option value="Graphic Design">Graphic Design</option>
                             <option value="Training">Training Department</option>
-                            <option value="Admin">Administrators</option>
+                            <option value="Administrators">Administrators</option>
                           </select>
                     </div>
                     </div>
-
                 </div>
                 <hr class="horizontal dark">
                 <p class="text-uppercase text-sm">About me</p>
@@ -117,7 +122,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="example-text-input" class="form-control-label">About me</label>
-                      <input class="form-control" type="text" value="" id="about" name="about">
+                      <input class="form-control" type="text" value="{{ Auth::user()->about }}" id="about" name="about">
                     </div>
                   </div>
                 </div>
@@ -127,12 +132,30 @@
       </form>
       <div class="col-md-4">
         <div class="card card-profile">
-          <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top">
+          @if (Auth::user()->city == 'FPT Hanoi')
+            <img src="./assets/img/bg-profile-hn.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Danang')
+            <img src="./assets/img/bg-profile-dn.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Quynhon')
+            <img src="./assets/img/bg-profile-qn.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Hochiminh')
+            <img src="./assets/img/bg-profile-hcm.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Cantho')
+            <img src="./assets/img/bg-profile-ct.jpg" alt="Image placeholder" class="card-img-top">
+            @elseif (Auth::user()->city == 'FPT Ville')
+            <img src="./assets/img/bg-profile-vl.jpg" alt="Image placeholder" class="card-img-top">
+            @else
+            <img src="./assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top">
+          @endif
           <div class="row justify-content-center">
             <div class="col-4 col-lg-4 order-lg-2">
               <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0" style="text-align: center">
                 <a href="javascript:;" style="text-align: center">
-                  <img src="{{ Auth::user()->avatar_original }}" class="rounded-circle img-fluid border border-3 border-white" >
+                    @if(empty($user->avatar_original))
+                    <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="rounded-circle img-fluid border border-3 border-white" >
+                @elseif(!empty($user->avatar_original))
+                    <img src="{{ $user->avatar_original }}" class="rounded-circle img-fluid border border-3 border-white" >
+                @endif
                 </a>
               </div>
             </div>
@@ -140,16 +163,21 @@
           <div class="card-body pt-0">
             <div class="text-center mt-4">
               <h5>
-                {{ Auth::user()->name }}<span class="font-weight-light">, 21</span>
+                {{ Auth::user()->name }}<span class="font-weight-light">,
+                    @php
+                    $date = new DateTime(Auth::user()->birthday);
+                    $now = new DateTime();
+                    $interval = $now->diff($date);
+                    echo $interval->y;
+                @endphp
+                </span>
               </h5>
               <div class="h6 font-weight-300">
-                <i class="ni location_pin mr-2"></i>Vietnam
+                <i class="ni nilocation_pin mr-2"></i>{{ Auth::user()->city }} <br>
+                {{ Auth::user()->specialized }}
               </div>
               <div class="h6 mt-4">
-                <i class="ni business_briefcase-24 mr-2"></i>{{ Auth::user()->email }}
-              </div>
-              <div>
-                <i class="ni education_hat mr-2"></i>FPT Education
+                <p>{{ Auth::user()->about }}</p>
               </div>
             </div>
           </div>

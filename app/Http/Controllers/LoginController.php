@@ -15,7 +15,6 @@ class LoginController extends Controller
     protected $redirectAfterLogin = '/dashboard';
 
 
-
     public function getLogin()
     {
         return view('login');
@@ -28,8 +27,6 @@ class LoginController extends Controller
 
     public function callbackFromGoogle()
     {
-
-
         try {
             $user = Socialite::driver('google')->user();
             $is_user = User::where('email', $user->getEmail())->first();
@@ -44,8 +41,24 @@ class LoginController extends Controller
                     'avatar_original' => $user->getAvatar(),
                     'password' => Hash::make($user->getName().'@'.$user->getId()),
                     'email_verified_at' => now(),
-                    'role'=> 'staff',
                 ]);
+                $email = $user->getEmail();
+                $role = 'trainee';
+                $specialized = '';
+                if (strpos($email, 'BHA') !== false) {
+                    $specialized = 'Information Technology';
+                } elseif (strpos($email, 'BHB') !== false) {
+                    $specialized = 'Business';
+                } elseif (strpos($email, 'BHG') !== false) {
+                    $specialized = 'Graphic Design';
+                }
+                $saveUser->specialized = $specialized;
+                $saveUser->role = $role;
+                $saveUser->save();
+                Auth::login($saveUser);
+                return redirect()->route('dashboard');
+
+
             }else{
                 $saveUser = User::where('email',  $user->getEmail())->update([
                     'google_id' => $user->getId(),
@@ -55,7 +68,12 @@ class LoginController extends Controller
             }
             Auth::loginUsingId($saveUser->id);
             $success='Logged Successfully!';
-            return redirect()->route('dashboard')->with('success',$success);
+            if(Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff'){
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('learning');
+            }
+
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -64,10 +82,19 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
-
-
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $success='Logged Successfully!';
+            if(Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff'){
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('learning');
+            }
+        }else{
+            $error='Email or Password is incorrect!';
+            return redirect()->route('login')->with('error',$error);
+        }
     }
-
 
     public function logout()
     {
@@ -79,5 +106,6 @@ class LoginController extends Controller
     {
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/dashboard';
     }
+
 
 }
