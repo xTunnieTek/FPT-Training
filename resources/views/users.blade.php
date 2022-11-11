@@ -57,15 +57,35 @@
                             <span class="badge badge-sm bg-gradient-info">{{ $user->role }}</span>
                         </td>
                         <td class="align-middle">
-                            <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-                            <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
-                                <i class="fas fa-trash"></i>
-                            </a>
+
+                            @if($user->role == 'trainee' || $user->role == 'trainer')
+                                @if (Auth::user()->role == 'staff')
+                                    <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                    <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                @elseif (Auth::user()->role == 'admin')
+                                    <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                    <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                @endif
+                            @elseif($user->role == 'staff')
+                                @if (Auth::user()->role == 'admin')
+                                    <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                    <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                @endif
+                            @endif
                         </td>
                       </tr>
-                    </tr>
                     @endforeach
                 </tbody>
             </table>

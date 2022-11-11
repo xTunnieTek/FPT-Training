@@ -234,7 +234,6 @@ abstract class AbstractProvider implements ProviderContract
         }
 
         if ($this->hasInvalidState()) {
-            // dd(request()->all());
             throw new InvalidStateException;
         }
 

@@ -34,7 +34,7 @@
         @else
             @foreach ($category as $category)
             <div class="col-3">
-                <div class="card" style="width: 20rem; margin-top: 15rem">
+                <div class="card" style="width: 85%; margin-top: 15rem">
                     <img class="card-img-top" style="max-height: 400px" src="/assets/img/courses/index.jpg" alt="Card image cap">
                     <div class="card-body">
                     <h5 class="card-title">{{$category->categoryname}}</h5>

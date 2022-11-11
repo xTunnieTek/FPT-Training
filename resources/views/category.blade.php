@@ -14,7 +14,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$category->categoryname}}</h5>
                   <p class="card-text">{{$category->description}}</p>
-                    @if (Auth::user()->role == 'admin')
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'staff')
                         <a href="{{"/manage-course/Category=".$category['categoryid']}}" class="btn btn-primary">Go {{$category->categoryname}} Course</a>
                     @else
                         @if (Auth::user()->specialized == $category->categoryname)

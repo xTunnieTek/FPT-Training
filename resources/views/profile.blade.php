@@ -104,7 +104,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Department/Specialized</label>
-                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}" disabled>
+                        <select name="specialized" id="specialized" class="form-control" placeholder="{{ Auth::user()->specialized}}">
                             {{-- Đã chọn --}}
                             <option value="{{ Auth::user()->specialized}}" selected>{{ Auth::user()->specialized}}</option>
                             <option value="Information Technology">Information Technology</option>

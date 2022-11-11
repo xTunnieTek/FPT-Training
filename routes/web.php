@@ -23,10 +23,6 @@ Route::get('/', function () {
 
 
 
-        // Learning
-        Route::get('/learning', [LearningController::class, 'getCategory'])->name('learning');
-        Route::get('/learning/{id}', [LearningController::class, 'getCourse'])->name('learningCourse');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -45,15 +41,8 @@ Route::prefix('google')->name('google.')->group( function(){
 });
 
 
-// Route::get('/topic', function () {
-//     return view('topic');
-// });
-
-
-
 Route::get('/login', [LoginController::class, 'getLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'postLogin'])->name('postLogin');
-// Route::post('/login', [SignupController::class, 'postSignup'])->name('signup');
 
 
 // Middeleware
@@ -128,6 +117,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/learning', [LearningController::class, 'getCategory'])->name('learning');
         Route::get('/learning/{id}', [LearningController::class, 'getCourse'])->name('learningCourse');
 
+        //News
+        Route::get('/news', function()
+        {
+            return view('news');
+        })->name('news');
 });
 
 

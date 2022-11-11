@@ -18,7 +18,7 @@
           @endphp
          @if ($trainee == null)
          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('updateTraining') }}">
+            <a class="nav-link {{ (request()->is('learning')) ? 'active' : '' }}" href="{{ route('updateTraining') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
               </div>
@@ -27,7 +27,7 @@
           </li>
          @else
          <li class="nav-item">
-            <a class="nav-link" href="{{ route('learning') }}">
+            <a class="nav-link {{ (request()->is('learning')) ? 'active' : '' }}" href="{{ route('learning') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
               </div>
@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="{{ route('mycourse')}}">
+              <a class="nav-link {{ (request()->is('mycourse')) ? 'active' : '' }}" href="{{ route('mycourse')}}">
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-collection text-warning text-sm opacity-10"></i>
                 </div>
@@ -47,7 +47,7 @@
               $trainee = Auth::user()->google_id;
             @endphp
             <li class="nav-item">
-              <a class="nav-link" href="/trainee/{{$trainee}}">
+              <a class="nav-link {{ (request()->is('trainee/*')) ? 'active' : '' }}" href="/trainee/{{$trainee}}">
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
                 </div>
@@ -55,7 +55,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="{{ route('profile') }}">
+              <a class="nav-link {{ (request()->is('profile')) ? 'active' : '' }}" href="{{ route('profile') }}">
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-single-02 text-white text-sm opacity-10"></i>
                 </div>
@@ -66,7 +66,7 @@
 
         @elseif (Auth::user()->role == 'admin' || Auth::user()->role == 'trainer' || Auth::user()->role == 'staff')
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}" href="{{ route('dashboard') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
               </div>
@@ -74,15 +74,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./pages/tables.html">
+            <a class="nav-link {{ (request()->is('news')) ? 'active' : '' }}" href="{{route('news')}}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Schedules</span>
+              <span class="nav-link-text ms-1">News</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{ route('manageCategory')}}">
+            <a class="nav-link {{ (request()->is('manage-category')) ? 'active' : '' }}" href="{{ route('manageCategory')}}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
               </div>
@@ -94,7 +94,7 @@
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
                 </div>
-                <span class="nav-link-text ms-1">Document</span>
+                <span class="nav-link-text ms-1">Training</span>
               </a>
             </li>
           <li class="nav-item">
@@ -102,14 +102,14 @@
                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="ni ni-single-copy-04 text-white text-sm opacity-10"></i>
                 </div>
-                <span class="nav-link-text ms-1">Class</span>
+                <span class="nav-link-text ms-1">Trainee</span>
               </a>
             </li>
           <li class="nav-item mt-3">
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage Account</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{{ route('profile') }}">
+            <a class="nav-link {{ (request()->is('profile')) ? 'active' : '' }}" href="{{ route('profile') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
               </div>
@@ -119,7 +119,7 @@
           {{-- Check role nếu bằng 1 thì show không thì hidden --}}
             @if (Auth::user()->role == 'admin')
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('manageStaff')}}">
+                <a class="nav-link {{ (request()->is('manage-staff')) ? 'active' : '' }}" href="{{ route('manageStaff')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-badge text-primary text-sm opacity-10"></i>
                   </div>
@@ -127,7 +127,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ route('manageTrainer')}}">
+                <a class="nav-link {{ (request()->is('manage-trainer')) ? 'active' : '' }}" href="{{ route('manageTrainer')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                   </div>
@@ -135,7 +135,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="{{ route('manageUser')}}">
+                <a class="nav-link {{ (request()->is('manage-user')) ? 'active' : '' }}" href="{{ route('manageUser')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
                   </div>
@@ -144,15 +144,22 @@
               </li>
             @elseif (Auth::user()->role == 'staff')
               <li class="nav-item">
-                <a class="nav-link " href="{{ route('manageTrainer')}}">
+                <a class="nav-link {{ (request()->is('trainer')) ? 'active' : '' }}" href="{{ route('manageTrainer')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                   </div>
                   <span class="nav-link-text ms-1">Manage Trainer</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {{ (request()->is('users')) ? 'active' : '' }}" href="{{ route('manageUser')}}">
+                  <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Manage Users</span>
+                </a>
+              </li>
             @endif
-
         @endif
         </ul>
       </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace Laravel\Socialite\Two;
+
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Arr;
 
@@ -22,9 +23,6 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
         'openid',
         'profile',
         'email',
-
-
-
     ];
 
     /**
@@ -71,7 +69,6 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
         $user['verified_email'] = Arr::get($user, 'email_verified');
         $user['link'] = Arr::get($user, 'profile');
 
-
         return (new User)->setRaw($user)->map([
             'id' => Arr::get($user, 'sub'),
             'nickname' => Arr::get($user, 'nickname'),
@@ -79,7 +76,6 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
             'email' => Arr::get($user, 'email'),
             'avatar' => $avatarUrl = Arr::get($user, 'picture'),
             'avatar_original' => $avatarUrl,
-            'profileUrl' => Arr::get($user, 'profile'),
         ]);
     }
 }

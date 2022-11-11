@@ -27,14 +27,22 @@ class StaffController extends Controller
 
     // Add
     public function add(Request $request){
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = 'staff';
-        $user->city = $request->city;
-        $user->specialized = $request->specialized;
-        $user->save();
+        $checkEmail = User::where('email', $request->email)->first();
+        if($checkEmail){
+            return redirect()->back()->with('error', 'Email đã tồn tại');
+        }
+        else
+        {
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = 'staff';
+            $user->city = $request->city;
+            $user->specialized = $request->specialized;
+            $user->save();
+        }
+
         return redirect()->back();
     }
 
