@@ -140,10 +140,6 @@
                           <div>
                             <img src="./assets/img/icons/flags/GB.png" alt="Course flag">
                           </div>
-                          <div class="ms-4">
-                            <p class="text-xs font-weight-bold mb-0">Course ID:</p>
-                            <h6 class="text-sm mb-0">{{$item->courseid}}</h6>
-                          </div>
                         </div>
                     </td>
                     <td class="w-30">

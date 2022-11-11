@@ -74,32 +74,16 @@
         // container.classList.add("right-panel-active");
         // Alert('System is under construction, please try again later!') and turn off after 3000ms
         if (confirm('Công Tuấn bảo chỉ đăng nhập bằng Google thôi! Đừng cố đăng nhập nữa nhé!')) {
-            setTimeout(function(){ alert("Rồi nhé, cảm ơn thật đấy !"); });
+            setTimeout(function(){ alert("Rồi nhé, cảm ơn thật đấy ! \n PLEASE DONT TRY AGAIN OK!"); });
         }
         else
         {
-            setTimeout(function(){ alert("Đã bảo không được rồi, Đmm nữa !"); });
+            setTimeout(function(){ alert("Đã bảo không được rồi, Đừng Cố Nữa ! \n PLEASE DONT TRY AGAIN OK!"); });
         }
       });
 
       signInButton.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
-      });
-
-      forgot.addEventListener("click", () => {
-        if (confirm('Bạn Đang Quên Mật Khẩu Đúng Không?')) {
-            if (confirm('Bạn Có Nhớ Mật Khẩu Không?')) {
-                setTimeout(function(){ alert("Đã Bảo Bạn Nhớ Mật Khẩu Rồi, Đmm Nữa !"); });
-            }
-            else
-            {
-                setTimeout(function(){ alert("Hãy Cố Gắng Nhớ Lại, Ngày Sinh Nhật Của Bạn Hay Người Yêu Cũ Đi !"); });
-            }
-        }
-        else
-        {
-            setTimeout(function(){ alert("Đã bảo không được rồi, Đmm nữa !"); });
-        }
       });
 
     </script>

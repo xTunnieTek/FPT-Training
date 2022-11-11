@@ -13,10 +13,10 @@
         <div class="modal-content">
             <div class="container-fluid" style="padding: 0;">
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-md-7">
                         <img src="/assets/img/courses/index.jpg"style="width: 100%;">
                     </div>
-                    <div class="col-5">
+                    <div class="col-md-5">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel" style="color: #172b4d !important">{{$item->coursename}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -44,11 +44,11 @@
 @include('Layouts.navbar')
 
 <div class="container-fluid py-4">
-    <div class="row">
+    <div class="row" style="margin-top: 15rem">
         @foreach ($course as $course)
-        <div class="col-3">
+        <div class="col-md-3">
            <div class="hover-btn">
-            <div class="card" style="width: 85%; margin-top: 15rem">
+            <div class="card" style="width: 85%; margin-top: 2rem">
                 <img class="card-img-top" style="max-height: 400px" src="/assets/img/courses/index.jpg" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{$course->coursename}}</h5>

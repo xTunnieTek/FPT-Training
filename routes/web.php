@@ -122,6 +122,11 @@ Route::group(['middleware' => 'auth'], function () {
         {
             return view('news');
         })->name('news');
+
+
+        // Training
+        Route::get('/manage-training',[TrainingController::class, 'getAllEnrollList'])->name('Managetraining');
+        Route::get('/delete-training/{id}',[TrainingController::class, 'deleteEnroll'])->name('deleteTraining');
 });
 
 

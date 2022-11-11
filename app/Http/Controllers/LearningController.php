@@ -28,6 +28,13 @@ class LearningController extends Controller
         return view('learning-2', ['course' => $course, 'category' => $category,  'categoryid' => $categoryid]);
     }
 
+    // GetCourse if trainingid and courseid is existed
+    // public function getCourseIfExisted($categoryid, $courseid){
+    //     $category = Course::find($categoryid);
+    //     $course = course::join('category', 'courses.categoryid', '=', 'category.categoryid')->select('courses.*', 'categoryname as categoryname')->where('courses.categoryid', $categoryid)->get();
+    //     return view('learning-2', ['course' => $course, 'category' => $category,  'categoryid' => $categoryid, 'courseid' => $courseid]);
+    // }
+
     //getTopic
     public function getTopic(Request $request)
     {
@@ -41,4 +48,7 @@ class LearningController extends Controller
         $course = $request->input('course');
         return view('learning', ['course' => $course]);
     }
+
+
+
 }

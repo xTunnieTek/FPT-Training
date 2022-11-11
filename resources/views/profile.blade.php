@@ -67,7 +67,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Birthday | MM/d/y</label>
+                      <label for="example-text-input" class="form-control-label">Birthday | MM/dd/yyyy</label>
                       <input class="form-control" type="date" name="birthday" id="birthday" value="{{ Auth::user()->birthday }}">
                     </div>
                   </div>

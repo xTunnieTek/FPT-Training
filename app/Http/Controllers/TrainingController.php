@@ -19,14 +19,12 @@ class TrainingController extends Controller
     {
         $traineeid = Auth::user()->google_id;
         $courseid = Course::where('courseid', $request->courseid)->first();
-        //add enroll
         $enroll = new Enroll;
         $enroll->trainingid = $traineeid;
         $enroll->courseid = $courseid->courseid;
         $enroll->date = date('Y-m-d');
-        // dd($enroll);
         $enroll->save();
-        return redirect('/dashboard');
+        return redirect('/mycourse');
     }
 
     // Get Enroll List
@@ -63,6 +61,26 @@ class TrainingController extends Controller
         ->where('courses.courseid', $courseid)
         ->get();
         return view('learning-4', compact('topic','topicAll'));
+    }
+
+
+    // Get All Enroll List
+    public function getAllEnrollList()
+    {
+        $traineeid = Auth::user()->google_id;
+        // Enroll List join Course -- and get trainingid and users
+        $enroll = Enroll::join('courses', 'enroll.courseid', '=', 'courses.courseid')
+        ->join('users', 'enroll.trainingid', '=', 'users.google_id')
+        ->get();
+        return view('training', compact('enroll'));
+    }
+
+    // Delete Enroll
+    public function deleteEnroll($enrollid)
+    {
+        $enroll = Enroll::find($enrollid);
+        $enroll->delete();
+        return redirect('/manage-training');
     }
 
 }
