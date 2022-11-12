@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enroll', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->nullable();
-            $table->unsignedBigInteger('training_id');
-            $table->foreign('training_id')->references('id')->on('trainingid')->nullable();
+            $table->increments('id');
+            $table->unsignedInteger('courseid');
+            $table->foreign('courseid')->references('courseid')->on('courses')->nullable();
+            $table->unsignedInteger('trainingid');
+            $table->foreign('trainingid')->references('id')->on('trainingid')->nullable();
             $table->date('date')->nullable();
             $table->timestamps();
         });

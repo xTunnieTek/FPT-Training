@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('trainingid', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('google_id')->nullable();
             $table->foreign('google_id')->references('google_id')->on('users')->nullable();
             $table->string('skill')->nullable();

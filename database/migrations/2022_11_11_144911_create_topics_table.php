@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('topics', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->nullable();
+            $table->increments('topicid');
+            $table->unsignedInteger('courseid');
+            $table->foreign('courseid')->references('courseid')->on('courses')->nullable();
             $table->string('topicname')->nullable();
             $table->string('title')->nullable();
             $table->string('link')->nullable();

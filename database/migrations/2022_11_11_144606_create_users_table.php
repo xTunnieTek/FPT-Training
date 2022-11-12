@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('google_id')->unique()->nullable();
             $table->string('password')->nullable();
             $table->string('avatar_original')->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('specialized')->nullable();
-            $table->string('role')->nullable();
+            $table->string('role')->default('trainee');
             $table->string('about')->nullable();
             $table->timestamps();
         });

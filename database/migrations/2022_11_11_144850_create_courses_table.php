@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
+            $table->increments('courseid');
             $table->string('categoryid')->references('categoryid')->on('category')->nullable();
             $table->string('coursename')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('trainer')->references('id')->on('users')->nullable();
             $table->string('images')->nullable();
             $table->date('startdate')->nullable();
