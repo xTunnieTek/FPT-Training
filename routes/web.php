@@ -131,6 +131,14 @@ Route::group(['middleware' => 'auth'], function () {
         // Training
         Route::get('/manage-training',[TrainingController::class, 'getAllEnrollList'])->name('Managetraining');
         Route::get('/delete-training/{id}',[TrainingController::class, 'deleteEnroll'])->name('deleteTraining');
+
+
+
+        Route::get('/clear-cache', function()
+        {
+            Artisan::call('cache:clear');
+            return "Cache is cleared";
+        });
 });
 
 
