@@ -37,24 +37,18 @@ class TopicController extends Controller
         return redirect()->back();
     }
 
-    public function editTopic($topicid){
+    public function deleteTopic($topicid){
         $topic = Topic::find($topicid);
-        return view('edittopic', ['topic' => $topic]);
+        $topic->delete();
+        return redirect()->back();
     }
 
     public function updateTopic(Request $request, $topicid){
-        $topic = Topic::find($topicid);
-        $topic->courseid = $request->courseid;
+        $topic = Topic::find ($topicid);
         $topic->title = $request->title;
         $topic->about = $request->about;
         $topic->link = $request->link;
         $topic->save();
-        return redirect()->route('manageTopic')->with('success', 'Topic Updated Successfully!');
-    }
-
-    public function deleteTopic($topicid){
-        $topic = Topic::find($topicid);
-        $topic->delete();
         return redirect()->back();
     }
 }

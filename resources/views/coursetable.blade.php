@@ -1,4 +1,65 @@
 @include('Layouts.defaultLayout')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
+@foreach ($course as $item)
+<div class="modal fade" id="exampleModal{{$item->courseid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="container-fluid" style="padding: 0;">
+                <div class="row">
+                    <div class="col-md-7">
+                        <img src="{{$item->images}}" alt="" width="100%" height="100%">
+                    </div>
+                    <div class="col-md-5">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" style="color: #172b4d !important">{{$item->coursename}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                            <form action="{{url('/edit-course')}}/{{$item->courseid}}/update" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="topicname" class="form-label" style="color: #172b4d !important">Topic Name</label>
+                                    <input type="text" class="form-control" id="topicname" name="coursename" value="{{$item->coursename}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="topicname" class="form-label" style="color: #172b4d !important">Start Date</label>
+                                    <input type="text" class="form-control" id="topicname" name="startdate" value="{{$item->startdate}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="link" class="form-label" style="color: #172b4d !important">Images</label>
+                                    <input type="text" class="form-control" id="link" name="images" value="{{$item->images}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label" style="color: #172b4d !important">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="5">{{$item->description}}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label" style="color: #172b4d !important">Trainer</label>
+                                    <select name="trainer" id="trainer"  class="form-control">
+                                        @php
+                                            $trainer = DB::table('users')->where('role', 'trainer')->get();
+                                        @endphp
+                                        @foreach ($trainer as $item)
+                                            <option value="{{$item->name}}">{{$item->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" style="float: right;">Save</button>
+                                {{-- <a href="/edit-topic/{{$item->topicid}}/update" class="btn btn-primary">Update</a> --}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @include('Layouts.sidebar')
 @include('Layouts.navbar')
 
@@ -52,9 +113,9 @@
                           <span class="text-secondary text-xs font-weight-bold" style="	text-transform: uppercase;">{{ $course->categoryname }}</span>
                         </td>
                         <td class="align-middle">
-                          <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            Edit
-                          </a>
+                            <a href="" class="text-secondary font-weight-bold text-xs"  data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#exampleModal{{$course->courseid}}">
+                                Edit
+                              </a>
                         </td>
                         <td class="align-middle">
                             <a href="{{"/delete-course/".$course['courseid']}}" class="text-secondary font-weight-bold text-xs">

@@ -7,7 +7,13 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6>Users | <a class="btn btn-outline-primary btn-sm mb-0" href="/dashboard">Back</a></h6>
+              <h6>Manage User | Permission: <span style="color: rgb(89, 255, 47); text-transform: uppercase;"> {{Auth::user()->role}}</span></h6>
+                <form action="">
+                    <div class="input-group">
+                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control"  placeholder="Type here..." name="search" >
+                    </div>
+                </form>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -24,6 +30,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $users = DB::table('users')->get();
+                        //Search
+                        $search = $_GET['search'] ?? '';
+                    @endphp
+                    @if($search)
+                        @php
+                            $users = DB::table('users')->where('name', 'like', '%'.$search.'%')
+                            ->orWhere('city', 'like', '%'.$search.'%')
+                            ->orWhere('specialized', 'like', '%'.$search.'%')
+                            ->orWhere('address', 'like', '%'.$search.'%')
+                            ->orWhere('role', 'like', '%'.$search.'%')
+                            ->orWhere('email', 'like', '%'.$search.'%')
+                            ->get();
+                        @endphp
                     @foreach ($users as $user)
                     <tr>
                         <td>
@@ -36,22 +57,22 @@
                                     @endif
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                  <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
-                                  <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
+                                <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
                                 </div>
-                              </div>
+                            </div>
                         </td>
                         <td>
-                          <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
                         </td>
                         <td>
-                          <p class="text-xs font-weight-bold mb-0">{{ $user->city }}</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $user->city }}</p>
                         </td>
                         <td class="align-middle text-center text-sm">
                             <p class="text-xs font-weight-bold mb-0">{{ $user->specialized }}</p>
                         </td>
                         <td>
-                          <p class="text-xs font-weight-bold mb-0">{{ $user->address }}</p>
+                        <p class="text-xs font-weight-bold mb-0">{{ $user->address }}</p>
                         </td>
                         <td>
                             <span class="badge badge-sm bg-gradient-info">{{ $user->role }}</span>
@@ -85,8 +106,73 @@
                                 @endif
                             @endif
                         </td>
-                      </tr>
+                    </tr>
                     @endforeach
+                    @elseif($search == '')
+                        @foreach ($users as $user)
+                        <tr>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div>
+                                        @if(empty($user->avatar_original))
+                                            <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="avatar avatar-sm me-3" >
+                                        @elseif(!empty($user->avatar_original))
+                                            <img src="{{ $user->avatar_original }}" class="avatar avatar-sm me-3" >
+                                        @endif
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                    <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                            <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
+                            </td>
+                            <td>
+                            <p class="text-xs font-weight-bold mb-0">{{ $user->city }}</p>
+                            </td>
+                            <td class="align-middle text-center text-sm">
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->specialized }}</p>
+                            </td>
+                            <td>
+                            <p class="text-xs font-weight-bold mb-0">{{ $user->address }}</p>
+                            </td>
+                            <td>
+                                <span class="badge badge-sm bg-gradient-info">{{ $user->role }}</span>
+                            </td>
+                            <td class="align-middle">
+
+                                @if($user->role == 'trainee' || $user->role == 'trainer')
+                                    @if (Auth::user()->role == 'staff')
+                                        <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                            <i class="fas fa-user-edit"></i>
+                                        </a>
+                                        <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @elseif (Auth::user()->role == 'admin')
+                                        <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                            <i class="fas fa-user-edit"></i>
+                                        </a>
+                                        <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @endif
+                                @elseif($user->role == 'staff')
+                                    @if (Auth::user()->role == 'admin')
+                                        <a href="/manage-user/{{ $user->id }}/edit" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user" >
+                                            <i class="fas fa-user-edit"></i>
+                                        </a>
+                                        <a href="/manage-user/{{ $user->id }}/delete" class="btn btn-block btn-primary mb-3" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @endif
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -16,6 +16,7 @@
                     $time = date("H:i:s");
                 @endphp
                 <span class="text-white font-weight-bold">{{ date('l, d F Y', strtotime($today)) }}</span>
+                <span class="text-white font-weight-bold"></span>
             </li>
           </ol>
             {{-- Check time --}}

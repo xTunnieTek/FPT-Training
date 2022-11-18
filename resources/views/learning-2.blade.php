@@ -5,8 +5,6 @@
 </div>
 
 
-
-{{-- Tạo modal và các course được in ra, khi click vào button view detail thì hiển thị ra từng modal tương ứng --}}
 @foreach ($course as $item)
 <div class="modal fade" id="exampleModal{{$item->courseid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
