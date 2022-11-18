@@ -57,4 +57,11 @@ class TraineeController extends Controller
         $trainee->save();
         return redirect()->back();
     }
+
+
+    public function getAllTrainee()
+    {
+        $trainee = User::where('role', 'trainee')->get();
+        return view('traineetable', compact('trainee'));
+    }
 }

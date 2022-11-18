@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
         Route::post('/profile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
 
+
+        //Trainer
         Route::get('/manage-trainer', [TrainerController::class, 'getTrainer'])->name('manageTrainer');
         Route::get('/all-trainer', [TrainerController::class, 'getAllTrainer'])->name('allTrainer');
         Route::get('/edit-trainer/{id}', [TrainerController::class, 'edit'])->name('editTrainer');
@@ -74,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/manage-course/Category={id}', [CourseController::class, 'getCourse'])->name('manageCourse');
         Route::get('/all-course/Category={id}', [CourseController::class, 'getAllCourse'])->name('allCourse');
         Route::get('/edit-course/{id}', [CourseController::class, 'edit'])->name('editCourse');
-        Route::post('/edit-course/{id}', [CourseController::class, 'update'])->name('updateCourse');
+        Route::post('/edit-course/{id}/update', [CourseController::class, 'updateCourse'])->name('updateCourse');
         Route::post('/add-course', [CourseController::class, 'addCourse'])->name('addCourse');
         Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('deleteCourse');
 
@@ -87,10 +89,10 @@ Route::group(['middleware' => 'auth'], function () {
         //Topic
         Route::get('/manage-topic/{id}', [TopicController::class, 'getTopic'])->name('manageTopic');
         Route::get('/all-topic/{id}', [TopicController::class, 'getAllTopic'])->name('allTopic');
-        Route::get('/edit-topic/{id}', [TopicController::class, 'edit'])->name('editTopic');
-        Route::post('/edit-topic/{id}', [TopicController::class, 'update'])->name('updateTopic');
         Route::get('/delete-topic/{id}', [TopicController::class, 'deleteTopic'])->name('deleteTopic');
         Route::post('/add-topic', [TopicController::class, 'addTopic'])->name('addTopic');
+        Route::get('/edit-topic/{id}', [TopicController::class, 'editTopic'])->name('editTopic');
+        Route::post('/edit-topic/{id}/update', [TopicController::class, 'updateTopic'])->name('updateTopic');
 
 
         // user
@@ -105,6 +107,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/learning-ne', [TraineeController::class, 'addGoogleId'])->name('updateTraining');
         Route::get('/trainee/{google_id}', [TraineeController::class, 'getTraineeInfo'])->name('trainee');
         Route::post('/trainee/{google_id}/edit', [TraineeController::class, 'updateTraineeInfo'])->name('updateTrainee');
+        Route::get('/manage-trainee', [TraineeController::class, 'getAllTrainee'])->name('manageTrainee');
+
 
         //Training
         Route::get('/training/{google_id}/{courseid}', [TrainingController::class, 'addEnroll'])->name('training');
@@ -127,6 +131,14 @@ Route::group(['middleware' => 'auth'], function () {
         // Training
         Route::get('/manage-training',[TrainingController::class, 'getAllEnrollList'])->name('Managetraining');
         Route::get('/delete-training/{id}',[TrainingController::class, 'deleteEnroll'])->name('deleteTraining');
+
+
+
+        Route::get('/clear-cache', function()
+        {
+            Artisan::call('cache:clear');
+            return "Cache is cleared";
+        });
 });
 
 

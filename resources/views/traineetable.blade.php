@@ -4,10 +4,10 @@
 
 <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-8">
+      <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6>Manage Trainer</h6>
+            <h6>Manage Trainee</h6>
             <form action="">
                 <div class="input-group">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
@@ -34,7 +34,7 @@
                 @endphp
                 @if($search)
                     @php
-                        $trainers = DB::table('users')->where('name', 'like', '%'.$search.'%')
+                        $trainee = DB::table('users')->where('name', 'like', '%'.$search.'%')
                         ->orWhere('city', 'like', '%'.$search.'%')
                         ->orWhere('specialized', 'like', '%'.$search.'%')
                         ->orWhere('address', 'like', '%'.$search.'%')
@@ -42,8 +42,8 @@
                         ->orWhere('email', 'like', '%'.$search.'%')
                         ->get();
                     @endphp
-                    @foreach ($trainers as $user)
-                    @if ($user->role == 'trainer')
+                    @foreach ($trainee as $user)
+                    @if ($user->role == 'trainee')
                     <tr>
                         <td>
                           <div class="d-flex px-2 py-1">
@@ -83,8 +83,8 @@
                     @endif
                     @endforeach
                 @else
-                @foreach ($trainers as $user)
-                @if ($user->role == 'trainer')
+                @foreach ($trainee as $user)
+                @if ($user->role == 'trainee')
                 <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
@@ -130,80 +130,6 @@
           </div>
         </div>
       </div>
-        <div class="col-4">
-            <form method="post" enctype="multipart/form-data" action="{{route('addTrainer')}}">
-                @csrf
-            <div class="card">
-              <div class="card-header pb-0">
-                <div class="d-flex align-items-center">
-                  <p class="mb-0">Create An Account For Trainer</p>
-                  <button class="btn btn-primary btn-sm ms-auto">Create</button>
-                </div>
-              </div>
-              <div class="card-body">
-                <p class="text-uppercase text-sm">User Information</p>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Email address</label>
-                      <input class="form-control" type="email" id="email" name="email">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Full name</label>
-                      <input class="form-control" type="text" name="name" id="name" >
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">Password</label>
-                      <input class="form-control" type="password" name="password" id="password">
-                    </div>
-                  </div>
-                </div>
-                <hr class="horizontal dark">
-                <p class="text-uppercase text-sm">Contact Information</p>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                          <label for="example-text-input" class="form-control-label">Permission</label>
-                          <select name="role" id="role" class="form-control">
-                            <option value="trainer" selected>Trainer</option>
-                          </select>
-                        </div>
-                      </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="example-text-input" class="form-control-label">City/Campus</label>
-                      <select name="city" id="city" class="form-control" placeholder="Please choose campus">
-                        <option value="FPT Hanoi">FPT Hanoi</option>
-                        <option value="FPT Danang">FPT Danang</option>
-                        <option value="FPT Quynhon">FPT Quynhon</option>
-                        <option value="FPT Hochiminh">FPT Hochiminh</option>
-                        <option value="FPT Cantho">FPT Cantho</option>
-                        <option value="FPT Ville">FPT Ville</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Department/Specialized</label>
-                        <select name="specialized" id="specialized" class="form-control" >
-                            <option value="Information Technology">Information Technology</option>
-                            <option value="Business">Business</option>
-                            <option value="Graphic Design">Design Graphics</option>
-                            <option value="Training">Training Department</option>
-                            <option value="Admin">Administrators</option>
-                          </select>
-                    </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </form>
-    </div>
       @include('Layouts.footer')
     </div>
   </div>

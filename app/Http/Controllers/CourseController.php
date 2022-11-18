@@ -51,12 +51,12 @@ class CourseController extends Controller
     public function updateCourse(Request $request, $courseid){
         $course = Course::find($courseid);
         $course->coursename = $request->coursename;
-        $course->categoryid = $request->categoryid;
+        $course->images = $request->images;
         $course->trainer = $request->trainer;
         $course->startdate = $request->startdate;
         $course->description = $request->description;
         $course->save();
-        return redirect()->route('manageCourse')->with('success', 'Course Updated Successfully!');
+        return redirect()->back();
     }
 
     // Delete
