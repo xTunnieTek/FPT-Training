@@ -35,7 +35,7 @@ return [
     'google' => [
         'client_id'     => '489829556587-lp8dmolhj1i983e478vsajfcj46tmf3s.apps.googleusercontent.com',
         'client_secret' => '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',
-        'redirect'      => 'http://fptsystem.herokuapp.com/google/callback',
+        'redirect'      => 'https://fptsystem.herokuapp.com/google/callback',
     ],
 
 
