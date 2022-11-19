@@ -14,7 +14,6 @@ class LoginController extends Controller
     protected $redirectAfterLogout = '/login';
     protected $redirectAfterLogin = '/dashboard';
 
-
     public function getLogin()
     {
         return view('login');
@@ -101,7 +100,7 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
-    
+
 
     protected function redirectPath()
     {

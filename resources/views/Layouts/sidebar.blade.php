@@ -144,7 +144,7 @@
               </li>
             @elseif (Auth::user()->role == 'staff')
               <li class="nav-item">
-                <a class="nav-link {{ (request()->is('trainer')) ? 'active' : '' }}" href="{{ route('manageTrainer')}}">
+                <a class="nav-link {{ (request()->is('manage-trainer')) ? 'active' : '' }}" href="{{ route('manageTrainer')}}">
                   <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                   </div>
@@ -172,6 +172,4 @@
         </div>
     </div>
   </aside>
-
-
   <!-- Chưa đóng Body -->

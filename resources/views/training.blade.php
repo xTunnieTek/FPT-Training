@@ -9,9 +9,24 @@
           <div class="card-header pb-0">
             <h6>Training | <a class="btn btn-outline-primary btn-sm mb-0" href="/dashboard">Back</a></h6>
             <form action="">
-                <div class="input-group">
-                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control"  placeholder="Type here..." name="search" >
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control"  placeholder="Type here..." name="search" >
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <select class="form-control" name="specialized" >
+                            <option value="All">All</option>
+                            <option value="Business">Business</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Graphic Design">Graphic Design</option>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
                 </div>
             </form>
           </div>
@@ -32,6 +47,15 @@
                 @php
                     $users = DB::table('users')->get();
                     $search = $_GET['search'] ?? '';
+                    $specialized = $_GET['specialized'] ?? '';
+                    if($specialized != 'All'){
+                        $enroll = DB::table('users')
+                        ->join('enroll', 'users.google_id', '=', 'enroll.trainingid')
+                        ->join('courses', 'enroll.courseid', '=', 'courses.courseid')
+                        ->join('category', 'courses.categoryid', '=', 'category.categoryid')
+                        ->where('category.categoryname', '=', $specialized)
+                            ->get();
+                    }
                 @endphp
                 @if($search)
                     @php

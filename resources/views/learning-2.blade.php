@@ -1,5 +1,5 @@
 @include('Layouts.defaultLayout')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script> --}}
 <div class="position-absolute w-100 min-height-300 top-0 z-index-1" style="background-image: url('/assets/img/banner-2.png'); background-position-y: 100%; background-position-x: 90%;">
     <span class="mask bg-primary opacity-5"></span>
 </div>

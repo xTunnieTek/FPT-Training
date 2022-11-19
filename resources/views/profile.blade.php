@@ -34,13 +34,12 @@
   <div class="container-fluid py-4">
     <div class="row">
         <div class="col-md-8">
-            <form method="post" action="{{ route('updateProfile')}}" enctype="multipart/form-data" >
+            <form method="post" action="{{ route('updateMyProfile')}}" enctype="multipart/form-data" >
                 @csrf
             <div class="card">
               <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                   <p class="mb-0">Edit Profile</p>
-                  {{-- <a href="{{ route('updateProfile')}}" class="btn btn-primary btn-sm ms-auto">Update</a> --}}
                   <button class="btn btn-primary btn-sm ms-auto">Update</button>
                 </div>
               </div>

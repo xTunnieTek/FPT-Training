@@ -9,9 +9,43 @@
           <div class="card-header pb-0">
               <h6>Manage User | Permission: <span style="color: rgb(89, 255, 47); text-transform: uppercase;"> {{Auth::user()->role}}</span></h6>
                 <form action="">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control"  placeholder="Type here..." name="search" >
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control"  placeholder="Type here..." name="search" >
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <select class="form-control" name="specialized" >
+                                <option value="All">All</option>
+                                <option value="Business">Business</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Graphic Design">Graphic Design</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <select class="form-control" name="city" >
+                                <option value="All">All</option>
+                                <option value="FPT Cantho">FPT Cantho</option>
+                                <option value="FPT Hanoi">FPT Hanoi</option>
+                                <option value="FPT Quynhon">FPT Quynhon</option>
+                                <option value="FPT Hochiminh">FPT Hochiminh</option>
+                                <option value="FPT Danang">FPT Danang</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <select class="form-control" name="role" >
+                                <option value="All">All</option>
+                                <option value="trainer">Trainer</option>
+                                <option value="trainee">Trainee</option>
+                                <option value="admin">Admin</option>
+                                <option value="staff">Staff</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
                     </div>
                 </form>
           </div>
@@ -34,17 +68,29 @@
                         $users = DB::table('users')->get();
                         //Search
                         $search = $_GET['search'] ?? '';
+                        $specialized = $_GET['specialized'] ?? '';
+                            $city = $_GET['city'] ?? '';
+                            $role = $_GET['role'] ?? '';
+                            if($specialized != 'All'){
+                                $users = DB::table('users')->where('specialized', 'like', '%'.$specialized.'%')->get();
+                            }
+                            if($city != 'All'){
+                                $users = DB::table('users')->where('city', 'like', '%'.$city.'%')->get();
+                            }
+                            if($role != 'All'){
+                                $users = DB::table('users')->where('role', 'like', '%'.$role.'%')->get();
+                            }
                     @endphp
                     @if($search)
                         @php
                             $users = DB::table('users')->where('name', 'like', '%'.$search.'%')
-                            ->orWhere('city', 'like', '%'.$search.'%')
-                            ->orWhere('specialized', 'like', '%'.$search.'%')
-                            ->orWhere('address', 'like', '%'.$search.'%')
-                            ->orWhere('role', 'like', '%'.$search.'%')
-                            ->orWhere('email', 'like', '%'.$search.'%')
-                            ->get();
-                        @endphp
+                                ->orWhere('city', 'like', '%'.$search.'%')
+                                ->orWhere('specialized', 'like', '%'.$search.'%')
+                                ->orWhere('address', 'like', '%'.$search.'%')
+                                ->orWhere('role', 'like', '%'.$search.'%')
+                                ->orWhere('email', 'like', '%'.$search.'%')
+                                ->get();
+                            @endphp
                     @foreach ($users as $user)
                     <tr>
                         <td>
