@@ -10,9 +10,9 @@
           <div class="avatar avatar-xl position-relative">
             @if(empty($user->avatar_original))
             <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="w-100 border-radius-lg shadow-sm" >
-        @elseif(!empty($user->avatar_original))
-            <img src="{{ $user->avatar_original }}" class="w-100 border-radius-lg shadow-sm" >
-        @endif
+            @elseif(!empty($user->avatar_original))
+                <img src="{{ $user->avatar_original }}" class="w-100 border-radius-lg shadow-sm" >
+            @endif
           </div>
         </div>
         <div class="col-auto my-auto">
@@ -150,7 +150,7 @@
             <div class="col-4 col-lg-4 order-lg-2">
               <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0" style="text-align: center">
                 <a href="javascript:;" style="text-align: center">
-                    @if(empty($user->avatar_original))
+                @if(empty($user->avatar_original))
                     <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="rounded-circle img-fluid border border-3 border-white" >
                 @elseif(!empty($user->avatar_original))
                     <img src="{{ $user->avatar_original }}" class="rounded-circle img-fluid border border-3 border-white" >

@@ -1,8 +1,3 @@
-{{-- @if(session('success'))
-<div class="alert alert-success" role="alert">
-    <strong>{{ session('success') }}</strong>
-</div>
-@endif --}}
 <main class="main-content position-relative border-radius-lg z-index-2">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
@@ -32,18 +27,18 @@
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control"  placeholder="Type here..." name="search" >
+                    <button class="form-control" data-bs-toggle="modal" data-bs-target="#search" style="width:15rem !important"> Search </button>
+                    {{-- <input type="text" class="form-control"  placeholder="Type here..." name="search" > --}}
                 </div>
             </div>
           </div>
         </div>
         <a class="nav-link " href="{{ route('profile') }}">
-            {{-- @if(!empty($user->avatar_original))
+            @if(!empty($user->avatar_original))
                 <img src="{{ $user->avatar_original }}" class="img-avatar" >
             @elseif(empty($user->avatar_original))
                 <img src="https://yt3.ggpht.com/ytc/AMLnZu-WMQDBrCRSdXfuoyDMZGcI9Ur4hmnWeD8Fw7QDxQ=s900-c-k-c0x00ffffff-no-rj" class="img-avatar" >
-            @endif --}}
-            <img src="{{Auth::user()->avatar_original }}" class="img-avatar">
+            @endif
         </a>
       </div>
     </nav>

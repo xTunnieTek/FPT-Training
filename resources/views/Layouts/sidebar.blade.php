@@ -1,3 +1,71 @@
+@php
+    $search = Request::get('search');
+    $user = DB::table('users')->where('name', 'like', '%'.$search.'%')->get();
+    $course = DB::table('courses')->where('coursename', 'like', '%'.$search.'%')->get();
+    $topic = DB::table('topics')
+    ->join('courses', 'topics.courseid', '=', 'courses.courseid')
+    ->where('coursename', 'like', '%'.$search.'%')
+    ->orWhere('title', 'like', '%'.$search.'%')->get();
+@endphp
+
+
+<div class="modal fade" id="search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="container-fluid" style="padding: 5px; background-color:#101d35; border-radius:5px; border:none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="modal-body text-start">
+                        <h5 style="color: #5d6e8b !important">Search</h5>
+                           <form action="">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="search" id="search" placeholder="Search" autofocus>
+                                </div>
+                           </form>
+                           {{-- Print result search --}}
+
+                            @if($search)
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if($user->count() > 0)
+                                        <hr><h4>Users</h4>
+                                        <ul>
+                                            @foreach ($user as $item)
+                                            <li><a href="/manage-user/{{$item->id}}/edit" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{{$item->email}}">{{$item->name}}</a><br></li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                        @if($course->count() > 0)
+                                        <hr><h4>Courses</h4>
+                                        <ul>
+                                            @foreach ($course as $item)
+                                            <li><a href="/all-course/Category={{$item->categoryid}}">{{$item->coursename}}</a><br></li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                        @if($topic->count() > 0)
+                                        <hr><h4>Topics</h4>
+                                        <ul>
+                                            @foreach ($topic as $item)
+                                            <li><a href="/all-topic/{{$item->courseid}}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{{$item->coursename}}">{{$item->title}}</a><br></li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                    </div>
+                                </div>
+                                @else
+                                    <hr>
+                                    <p>No Result</p>
+                                @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <body class="g-sidenav-show dark-version bg-gray-600">
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ps" id="sidenav-main" data-color="warning">

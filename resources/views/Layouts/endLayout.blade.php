@@ -20,8 +20,6 @@
 
         $enroll = DB::table('enroll')->get();
         $countenroll = count($enroll);
-
-
     @endphp
 
 

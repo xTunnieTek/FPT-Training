@@ -61,7 +61,10 @@ class TraineeController extends Controller
 
     public function getAllTrainee()
     {
-        $trainee = User::where('role', 'trainee')->get();
+        $trainee = User::where('role', 'trainee')
+        ->join('trainingid', 'users.google_id', '=', 'trainingid.google_id')
+        ->select('users.*', 'trainingid.*')
+        ->get();
         return view('traineetable', compact('trainee'));
     }
 }
