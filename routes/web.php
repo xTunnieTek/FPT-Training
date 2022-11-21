@@ -50,8 +50,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile');
-        Route::post('/profile', [ProfileController::class, 'updateUserInfo'])->name('updateProfile');
-
 
         //Trainer
         Route::get('/manage-trainer', [TrainerController::class, 'getTrainer'])->name('manageTrainer');

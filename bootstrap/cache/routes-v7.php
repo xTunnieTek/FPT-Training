@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::u4TFRxGJnvZglAo6',
+            '_route' => 'generated::X3CZGOkBzGy8TuzT',
           ),
           1 => NULL,
           2 => 
@@ -250,22 +250,6 @@ app('router')->setCompiledRoutes(
           array (
             'GET' => 0,
             'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'updateMyProfile',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
           ),
           3 => NULL,
           4 => false,
@@ -615,26 +599,6 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'Managetraining',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/config-cache' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'generated::IQZylC3nO3CWfpvk',
           ),
           1 => NULL,
           2 => 
@@ -1401,7 +1365,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::u4TFRxGJnvZglAo6' => 
+    'generated::X3CZGOkBzGy8TuzT' => 
     array (
       'methods' => 
       array (
@@ -1423,7 +1387,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::u4TFRxGJnvZglAo6',
+        'as' => 'generated::X3CZGOkBzGy8TuzT',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1690,43 +1654,6 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'profile',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'updateMyProfile' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'profile',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-        ),
-        'uses' => 'App\\Http\\Controllers\\ProfileController@updateUserInfo',
-        'controller' => 'App\\Http\\Controllers\\ProfileController@updateUserInfo',
-        'namespace' => 'App\\Http\\Controllers',
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'updateMyProfile',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3307,7 +3234,7 @@ app('router')->setCompiledRoutes(
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:282:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:64:"function()
         {
             return \\view(\'news\');
-        }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005250000000000000000";}";s:4:"hash";s:44:"Q9RxtkLXU0zqOEQGOnP9y/1pJKElr1L3TUDurgi36wY=";}}',
+        }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005240000000000000000";}";s:4:"hash";s:44:"/flPoBW3VMkv0hoGqFV7de8MD+cxt2wyGWpL1L9Mn8Y=";}}',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => '',
         'where' => 
@@ -3390,46 +3317,6 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'deleteTraining',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'generated::IQZylC3nO3CWfpvk' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'config-cache',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-        ),
-        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:340:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:121:"function() {
-            $exitCode = \\Artisan::call(\'config:cache\');
-            return \'Config cache cleared\';
-        }";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005290000000000000000";}";s:4:"hash";s:44:"qcJdFoWEFdas/8TSWFBzby5koOdqS6gEvMRXaVkOCDE=";}}',
-        'namespace' => 'App\\Http\\Controllers',
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'generated::IQZylC3nO3CWfpvk',
       ),
       'fallback' => false,
       'defaults' => 
